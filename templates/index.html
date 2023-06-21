@@ -1,0 +1,120 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Homepage</title>
+{% endblock %}
+
+{% block nav %}
+    <nav class="navbar navbar-expand-xl navbar-dark" style="background-color: var(--primary-color);">
+        <div class="container-fluid">
+            
+        <div class="container">
+            <a class="navbar-brand" href="#">
+            <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="30">
+            University Information Technology Center
+            </a>
+        </div>  
+            
+        <button class="btn">
+            <a href="#" class="text-decoration-none text-white">
+                UITC Log In
+        </a></button>
+            
+        </div>
+    </nav>
+{% endblock %}
+
+
+{% block body %}
+<div class=" mt-5 mx-auto row" style="width: 95%;">
+    <!-- Carousel -->
+    <div class=" col-lg-6 col-md-4  col-sm-1">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+            </ol>
+      
+            <!-- Slides -->
+            <div class="carousel-inner mx-auto">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 1" class="mx-auto d-block">
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 2" class="mx-auto d-block">
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 3" class="mx-auto d-block">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info -->
+    <div class=" col-lg-6 col-md-8  col-sm-12 ">
+        <div class="d-flex flex-column justify-content-around h-100 ">
+
+            <div class="row mx-auto">
+                <h1 class="text-center">Job Request</h1>
+            </div>
+            <div class="row mx-auto w-75">
+                <p class=" text-muted text-center">
+                    Unlock the full potential of Technological University of the Philippines (TUP) with UITC. 
+                    We offer tailored technology solutions, including software management, networking, data handling, 
+                    and document management. Trust UITC as your reliable technology partner to enhance TUP's academic 
+                    and administrative operations. Experience the power of seamless support and cutting-edge expertise. 
+                    Request now for our services!
+                </p>
+            </div>
+            <div class="row">
+                <button class="btn btn-danger btn-md text-wrap mx-auto" style="padding:2%;width: fit-content;">Request</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+<!-- FOOTER -->
+{% block footer %}
+  <div class="px-5 row row-cols-1 row-cols-sm-1 row-cols-md-4 py-5 my-5 mx-auto -top"
+    style="background-color: var(--primary-color);">
+
+    <div class="col-lg-5 col-md-8 col-sm-12 mb-3" style="margin-right: 8%;">
+
+        <p class="text-light pb-3">ABOUT</h5>
+        <p class="p-0 text-light">UITC, your trusted technology partner at the Technological University of the Philippines (TUP).
+            We specialize in delivering tailored solutions to enhance TUP's operations and academic excellence.
+            From software and website management to networking, data handling, and document management, we provide
+            comprehensive services to meet your technological needs. With UITC, you can rely on cutting-edge expertise
+            and seamless support to unlock TUP's full potential in the digital age. Explore our services and
+            experience the difference UITC can make for your success.</p>
+    </div>
+    
+
+    <div class="col mb-3">
+        <p class="text-light pb-3">SITES</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="https://www.tup.edu.ph/" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">Technological University of the Philippines</p></a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">College of Science</p></a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">TUP: ERS</p></a></li>
+        </ul>
+      </div>
+
+    <div class="col mb-3">
+        <p class="text-light pb-3">CONTACT US</h5>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2"><a href="mailto:uitc@tup.edu.ph" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">uitc@tup.edu.ph</p></a></li>
+            <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">09xx - xxx - xxxx</p></a></li>
+      </ul>
+    </div>
+</div>
+
+
+
+  </footer>
+</div>
+{% endblock %}
