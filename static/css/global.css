@@ -1,0 +1,13 @@
+.btn {
+    background-color: var(--primary-color);
+}
+
+.page-control {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-between;
+    padding-top: 4em;
+    padding-bottom: 2em;
+    padding-left: 3em;
+    padding-right: 3em;
+}

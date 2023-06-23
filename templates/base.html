@@ -12,15 +12,19 @@
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
         rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
         crossorigin="anonymous">
-        
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
         crossorigin="anonymous"></script>
 
-    <!-- OTHER IMPORTS -->
+    <!--  GLOBAL CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/typography.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+
+    <!--  GLOBAL JS -->
+    <script src="{{ url_for('static', filename='js/global.js') }}"></script>
+
         
     <title>Default</title>
     {% block head %}{% endblock %}
@@ -80,7 +84,7 @@
                 <ul class="nav flex-column">
                     <li class="nav-item mb-2"><a href="mailto:uitc@tup.edu.ph" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">uitc@tup.edu.ph</p></a></li>
                     <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted"><p class="text-light m-0 p-0">09xx - xxx - xxxx</p></a></li>
-            </ul>
+                </ul>
             </div>
         </div>
     </footer>
@@ -95,7 +99,10 @@
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
         integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" 
         crossorigin="anonymous"></script>
+    
+    <script>
 
+    </script>
         
 </body>
 </html>

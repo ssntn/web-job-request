@@ -1,9 +1,105 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Homepage</title>
+
+<script src="{{ url_for('static', filename='js/a.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/a.css') }}">
+<title>Form A</title>
 {% endblock %}
 
 {% block body %}
-a
+<div class="col w-75 mx-auto">
+    <div class="mt-5 border bg-white">
+        <form action="{{ url_for('loading') }}" method="post">
+
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if session.name %}
+                        <p>Name: {{ session.name }}</p>
+                        <p>Email: {{ session.email }}</p>
+                        <p>Contact number: {{ session.contact }}</p>
+                        <p id="service-modal">No service</p>
+                        <p id="date-modal">No date</p>
+                        {% else %}
+                        <p>Some error occured.</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Request</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Modal -->
+
+            <h3 class="w-100 py-5 text-center">Attendance Record</h3>
+            <div class="ms-5">
+                
+                <p class="text-muted"> Please check desired services</p>
+        
+                <!-- Service Picker -->
+                <div class="form-check ps-5">
+                    <input value="Dailty Time Record" name="service" class="form-check-input" type="checkbox" value="a-dtr" id="a-dtr" required>
+                    <label class="form-check-label" for="a-dtr">
+                        Daily Time Record
+                    </label>
+                </div>
+                <div class="form-check ps-5">
+                    <input value="Biometric Record" name="service" class="form-check-input" type="checkbox" value="a-bio" id="a-bio">
+                    <label class="form-check-label" for="a-bio">
+                        Biometric Record
+                    </label>
+                </div>
+            </div>
+        
+            <!-- Date Picker -->
+            <div class="input-group ms-5 py-3 mt-3 w-75 ">
+        
+                <div class="dropdown open">
+                    <button class="py-3 btn btn-secondary dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                            name="month" aria-expanded="false" style="background-color: var(--primary-color);">
+                                Month
+                            </button>
+                    <div class="dropdown-menu" aria-labelledby="triggerId">
+                        <button class="dropdown-item">January</button>
+                        <button class="dropdown-item">February</button>
+                        <button class="dropdown-item">March</button>
+                        <button class="dropdown-item">April</button>
+                        <button class="dropdown-item">May</button>
+                        <button class="dropdown-item">June</button>
+                        <button class="dropdown-item">July</button>
+                        <button class="dropdown-item">August</button>
+                        <button class="dropdown-item">September</button>
+                        <button class="dropdown-item">October</button>
+                        <button class="dropdown-item">November</button>
+                        <button class="dropdown-item">December</button>
+                    </div>
+                </div>
+                
+                <div class="form-floating w-75">                
+                    <input class="form-control" type="text" name="year" id="year" placeholder="Year:" required>
+                    <label for="name" class="" style="padding-left: 1em;">Year:</label>
+                </div>
+        
+            </div>
+        
+            <div class="page-control">
+                <input name="back" id="back-btn" class="btn btn-danger btn-lg" type="submit" value="Back">
+                <button id="modal-button" type="button" class="btn btn-danger btn-lg " data-bs-toggle="modal" data-bs-target="#exampleModal">Next</button>
+            </div>
+        </form>
+            
+    </div>
+</div>
+  
+
 {% endblock %}
