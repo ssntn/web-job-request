@@ -4,7 +4,13 @@
     --light-gray: #F8F9FA;
     --border-light: color: rgba(0, 0, 0, 0.5);
 }
+  
+/* BODY */
+body {
+  background-color: #F8F9FA;
+}
 
+/* SCROLL BAR */
 /* width */
 ::-webkit-scrollbar {
     width: 10px;
@@ -25,7 +31,14 @@
   ::-webkit-scrollbar-thumb:hover {
     background: #555; 
   }
-  
-  body {
-    background-color: #F8F9FA;
+
+  /* NUMBER INPUT */
+  input[type="number"]::-webkit-inner-spin-button,
+  input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  input[type="number"] {
+    -moz-appearance: textfield;
   }

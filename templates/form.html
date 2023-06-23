@@ -2,27 +2,148 @@
 
 {% block head %}
 <title>Homepage</title>
+
+<script src="{{ url_for('static', filename='js/form.js') }}"></script>
+<script src="{{ url_for('static', filename='css/form.css') }}"></script>
 {% endblock %}
 
 
 {% block body %}
+<form id="service-form" method="POST" action="{{ url_for('form_a') }}">
 
-    <div class="col border w-75 mt-5 mx-auto bg-body" style="height: 500px;">
-
-        <h1 class="p-5 ">Personal Information</h3>
-            <div class="row form-floating mb-3 mx-auto px-5">
-                <input type="text" name="name" id="name" placeholder="Name:" class="form-control">
-                <label for="name" class="mx-auto" style="padding-left: 4em;">Name:</label>
-            </div>
-            
-
-        <div class="row input-group mb-3 mx-auto px-5">
-            <input type="text" class="form-control" placeholder="(ex) juan.dela.cruz" aria-label="Recipient's username" aria-describedby="basic-addon2">
-            <span class="px-5 input-group-text" id="basic-addon2">@tup.edu.ph</span>
+    <div class="col border w-75 mt-5 mb-0 pb-5 mx-auto bg-body rounded-3">
+    
+        <h3 class="px-5 pt-5 pb-3 ">Personal Information</h3>
+    
+        <div class="row form-floating mb-3 mx-auto px-5">
+            <input class="form-control" type="text" name="name" id="name" placeholder="Name:" required>
+            <label for="name" class="mx-auto" style="padding-left: 4em;">Name:</label>
         </div>
-        <div class="row border my-5 mx-5" >a</div>
+        <div class="invalid-feedback">Please enter your name.</div>
+    
+        <div class="row form-floating mb-3 mx-auto px-5">
+            <input class="form-control" type="email" name="email" id="email" placeholder="Email:" required>
+            <label for="email" class="mx-auto" style="padding-left: 4em;">Email:</label>
+        </div>
+        <div class="invalid-feedback">Please enter your email.</div>    
+    
+        <div class="row form-floating mb-3 mx-auto px-5">
+            <input class="form-control" type="number" name="contact" id="contact" placeholder="Contact Number:" required>
+            <label for="contact-number" class="mx-auto" style="padding-left: 4em;">Contact Number:</label>
+        </div>
+        <div class="invalid-feedback">Please enter your contact number.</div>
+    </div>
+    
+    <div class="col border w-75 mt-5 pb-5 mx-auto bg-body rounded-3"><div class="accordion" id="accordionExample">
+        
+        <h3 class="px-5 pt-5 pb-3 ">UITC Services</h3>
+        <div class="row">
+            <div class="col-lg-1 col-md-1 col-sm-0"></div>
+            <div class="col-lg-10 col-md-10 col-sm-">
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button id="service-a" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                            A. Attendance Record
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the first item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button id="service-b" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            B. TUP Account Management
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the second item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button id="service-c" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            C. Internet and Telephone Management
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the third item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button id="service-d" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            D. ICT Equipment Management
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the fourth item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFive">
+                        <button id="service-e" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                            E. Software and Website Management
+                        </button>
+                    </h2>
+                    <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the fifth item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSix">
+                        <button id="service-f" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                            F. Data, Documents, and Reports
+                        </button>
+                    </h2>
+                    <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the sixth item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSeven">
+                        <button id="service-g" class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                            G. Others
+                        </button>
+                    </h2>
+                    <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#accordionExample">
+                        <div class="accordion-body">
+                            <strong>This is the seventh item's accordion body.</strong> a</div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-1 col-md-1 col-sm-0"></div>
+
+        </div>
+    
+            
+    </div></div>
+    <div class="mx-auto my-5 w-75">
+
+        <div class="d-inline-flex ">
+            <input class type="checkbox" name="terms" id="terms">
+            <label class="px-2" for="terms">
+                By filling this form, it is understood that you adhere and accept the Terms and 
+                Conditions of the Use of <a href="#">ICT Resources Policy</a> and <a href="#">Privacy Policy</a> of the University
+            </label>
+        </div>
 
     </div>
+    <br>
+    <div class="row w-75 mx-auto">
+        <div class="col-lg-11 col-md-10"></div>
+        <button id="service-selection-btn" class="btn col-lg-1 col-md-3 btn-primary p-2 text-center" type="submit" disabled>Submit</button>
+    </div>
+    
+</form>
+
 
 {% endblock %}
 
