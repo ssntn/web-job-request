@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Homepage</title>
+{% endblock %}
+
+
+{% block body %}
+
+    <div class="col border w-75 mt-5 mx-auto bg-body" style="height: 500px;">
+
+        <h1 class="p-5 ">Personal Information</h3>
+            <div class="row form-floating mb-3 mx-auto px-5">
+                <input type="text" name="name" id="name" placeholder="Name:" class="form-control">
+                <label for="name" class="mx-auto" style="padding-left: 4em;">Name:</label>
+            </div>
+            
+
+        <div class="row input-group mb-3 mx-auto px-5">
+            <input type="text" class="form-control" placeholder="(ex) juan.dela.cruz" aria-label="Recipient's username" aria-describedby="basic-addon2">
+            <span class="px-5 input-group-text" id="basic-addon2">@tup.edu.ph</span>
+        </div>
+        <div class="row border my-5 mx-5" >a</div>
+
+    </div>
+
+{% endblock %}
+

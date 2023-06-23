@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Homepage</title>
+{% endblock %}
+
+
+
+{% block body %}
+<div class=" mt-5 mx-auto row" style="width: 95%;">
+    <!-- Carousel -->
+    <div class=" col-lg-6 col-md-8  col-sm-12">
+        <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-bs-target="#myCarousel" data-bs-slide-to="0" class="active"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="1"></li>
+                <li data-bs-target="#myCarousel" data-bs-slide-to="2"></li>
+            </ol>
+      
+            <!-- Slides -->
+            <div class="carousel-inner mx-auto">
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 1" class="mx-auto d-block">
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 2" class="mx-auto d-block">
+                </div>
+                <div class="carousel-item active">
+                    <img src="https://picsum.photos/600/600" alt="Image 3" class="mx-auto d-block">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Info -->
+    <div class=" col-lg-6 col-md-8  col-sm-12 ">
+        <div class="d-flex flex-column justify-content-around h-100 ">
+
+            <div class="row mx-auto">
+                <h1 class="text-center">Job Request</h1>
+            </div>
+
+            <div class="row mx-auto w-75">
+                <p class=" text-muted text-center">
+                    Unlock the full potential of Technological University of the Philippines (TUP) with UITC.
+                    We offer tailored technology solutions, including software management, networking, data handling, 
+                    and document management. Trust UITC as your reliable technology partner to enhance TUP's academic 
+                    and administrative operations. Experience the power of seamless support and cutting-edge expertise. 
+                    Request now for our services!
+                </p>
+            </div>
+
+            <div class="row mx-auto">
+                <form action="{{ url_for('form') }}" style="padding:2%;width: fit-content;">
+                    <button class="btn btn-danger btn-md text-wrap mx-auto" >Request</button>
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
