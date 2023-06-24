@@ -41,12 +41,19 @@ def read():
 @app.route('/loading', methods=['POST'])
 def loading():
     if request.method == 'POST':
-        session['service'] = request.form.get("service")
-        session['month'] = request.form.get("month")
-        session['year'] = request.form.get("year")
 
-        
-        return render_template(route.loading)
+        data = {
+            "name": session["name"],
+            "email": session["email"],
+            "contact": session["contact"],
+            'service': request.form.get("service"),
+            'month': request.form.get("month"),
+            'year': request.form.get("year"),
+        }
+
+        return db.create_request(data)
+
+        # return render_template(route.loading)
     
 
 if __name__ == "__main__":

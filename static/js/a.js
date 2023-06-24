@@ -16,6 +16,7 @@ $(document).ready(function() {
     // DROPDOWN
     $('.dropdown-item').click(function(){
         $('.dropdown-toggle').text($(this).text());
+        $('#month-input').val($(this).text());
     });
 
     $("#modal-button").click(function(){
