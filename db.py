@@ -25,13 +25,30 @@ def read_list():
             l = [doc.to_dict() for doc in services_ref.stream()]
             return jsonify(l), 200
     except Exception as e:
-        return f"An Error Occurred: {e}"
+        return {}
+
+#####################################################################
+#                       Request CRUD
 
 def create_request(data):
-    
     try:
         id = uuid1()
         requests_ref.document(str(id)).set(data)
         return jsonify({"success": True}), 200
     except Exception as e:
-        return f"An Error Occurred: {e}"
+        return {}
+
+def read_request(id=None):
+    try:
+        if id:
+            request_id = request.args.get(id)
+            doc = services_ref.document(request_id).get()
+            q = {}
+            q['id'] = doc.id
+            q['data'] = doc
+            return q.to_dict()
+        else:
+            l = [{'id':doc.id, 'data':doc.to_dict()} for doc in requests_ref.stream()]
+            return l
+    except Exception as e:
+        return {}

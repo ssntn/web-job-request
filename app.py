@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, request, session, request, j
 # Ian defined imports
 import routes as route
 import db_config, db
+from constants import SERVICE_STATE
 
 # App config
 app = Flask(__name__)
@@ -49,12 +50,22 @@ def loading():
     if request.method == 'POST':
 
         data = {
-            "name": session["name"],
-            "email": session["email"],
-            "contact": session["contact"],
-            'sub-service': request.form.get("service"),
-            'date': request.form.get("month") + request.form.get("year"),
-            'request_date': get_today()
+            'user': {
+                "name": session["name"],
+                "email": session["email"],
+                "contact": session["contact"]
+            },
+            'service': {
+                'name': session["service"],
+                'type': request.form.get("service"),
+                'date': request.form.get("month") +" "+request.form.get("year"),
+            },
+            'dates': {
+                'requested': get_today(),
+                'accepted': None,
+                'completed': None
+            },
+            'state': SERVICE_STATE.PENDING
         }
 
         return db.create_request(data)
@@ -68,7 +79,7 @@ def admin_login():
 @app.route('/request')
 def request_page():
     data = db.read_request()
-    # return data
+    return data
     return render_template(route.request, data=data)
 
 
