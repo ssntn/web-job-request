@@ -13,7 +13,9 @@ $(document).ready(function() {
 
         var collapsed = !(String($(this).attr('class')).toLowerCase()).includes("collapsed");
         var selected = String($(this).attr('id'));
-        
+        var ms = ($(this).text()).trim().substring(3);
+        $("#main-service").val(ms);
+
         if(collapsed){
             client_data.service = selected.slice(-1);
             $("#service-form").attr("action", "/form_"+client_data.service);

@@ -11,6 +11,11 @@ app.config["SESSION_PERMANENT"] = False
 app.secret_key = "23456789"
 app.config["SESSION_TYPE"] = 'filesystem'
 
+from datetime import datetime
+def get_today():
+    now = datetime.now()
+    return now.strftime("%m/%d/%Y")
+
 #Routing
 @app.route('/')
 def index():
@@ -29,6 +34,7 @@ def form_a():
         session["name"] = request.form.get("name")
         session["email"] = request.form.get("email")
         session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
         return render_template(route.service_a)
     
     
@@ -46,13 +52,12 @@ def loading():
             "name": session["name"],
             "email": session["email"],
             "contact": session["contact"],
-            'service': request.form.get("service"),
-            'month': request.form.get("month"),
-            'year': request.form.get("year"),
+            'sub-service': request.form.get("service"),
+            'date': request.form.get("month") + request.form.get("year"),
+            'request_date': get_today()
         }
 
         return db.create_request(data)
-
         # return render_template(route.loading)
 
 # Admin Routing 
@@ -62,7 +67,9 @@ def admin_login():
 
 @app.route('/request')
 def request_page():
-    return render_template(route.request)
+    data = db.read_request()
+    # return data
+    return render_template(route.request, data=data)
 
 
 

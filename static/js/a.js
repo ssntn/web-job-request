@@ -20,7 +20,7 @@ $(document).ready(function() {
     });
 
     $("#modal-button").click(function(){
-        $("#service-modal").text("Service: "+$('input[name="service"]:checked').val());
+        $("#service-modal").text("Type: "+$('input[name="service"]:checked').val());
         $("#date-modal").text("Date: "+$("#triggerId").text() +" "+ $("#year").val());
     })
 
