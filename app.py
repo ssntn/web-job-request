@@ -54,7 +54,18 @@ def loading():
         return db.create_request(data)
 
         # return render_template(route.loading)
-    
+
+# Admin Routing 
+@app.route('/admin')
+def admin_login():
+    return render_template(route.admin_login)
+
+@app.route('/request')
+def request_page():
+    return render_template(route.request)
+
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

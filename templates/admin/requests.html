@@ -1,0 +1,84 @@
+{% extends 'admin/base.html' %}
+
+{% block head %}
+<title>Job Request | Admin</title>
+<script src="{{ url_for('static', filename='js/admin/requests.js') }}"></script>
+{% endblock %}
+
+
+{% block body %}
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Launch demo modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class=" w-75 mx-auto my-5">
+    <div class="d-inline-block mb-3">
+        <div class="dropdown open">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId-status" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                Incoming
+            </button>
+            <div class="dropdown-menu" id="status-filter-btn" aria-labelledby="triggerId">
+                <button class="dropdown-item status-filters" href="#">Incoming</button>
+                <button class="dropdown-item status-filters" href="#">Pending</button>
+                <button class="dropdown-item status-filters" href="#">Completed</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="d-inline-block">
+        <div class="dropdown open">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId-service" data-bs-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                All
+            </button>
+            <div class="dropdown-menu" id="service-filter-btn" aria-labelledby="triggerId">
+                <button class="dropdown-item btn-danger service-filters" href="#">All</button>
+                <button class="dropdown-item btn-danger service-filters">Attendance Record</button>
+            </div>
+        </div>
+    </div>
+    
+    <div class="table-responsive rounded-3 border border-black pt-3">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Name</th>
+                    <th scope="col">Request</th>
+                    <th scope="col">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="">
+                    <td scope="row">R1C1</td>
+                    <td>R1C2</td>
+                    <td>R1C3</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+
+{% endblock %}
