@@ -94,19 +94,22 @@ $(document).ready(function() {
     // Server side
     function add_rows() {
         read_request().then(function(data) {
-            var row = $('<tr>');
-      
             if (data !== null) {
                 JSON.parse(data).forEach(function(element) {
+                    var row = $('<tr></tr>');
                     row.attr('id', element.id);
                     row.attr('class', 'request-data-row');
-                    row.append($('<td>').text(element.data.user.name));
-                    row.append($('<td>').text(element.data.service.name));
-                    row.append($('<td>').text(element.data.dates.requested));
-                    row.append($('<td>').text(get_status(element.data.state)));
+                    row.append($('<td></td>').text(element.data.user.name));
+                    row.append($('<td></td>').text(element.data.service.name));
+                    row.append($('<td></td>').text(element.data.dates.requested));
+                    row.append($('<td></td>').text(get_status(element.data.state)));
+                    $("#table-body").append(row);
                 });
-            } else row.append($('<td colspan="3">').text("No data"));
-            $("#table-body").append(row);
+            } else {
+                var row = $('<tr></tr>');
+                row.append($('<td colspan="3">').text("No data"));
+                $("#table-body").append(row);
+            }
         });
     }
     
