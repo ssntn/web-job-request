@@ -3,29 +3,30 @@
 {% block head %}
 <title>Job Request | Admin</title>
 <script src="{{ url_for('static', filename='js/admin/requests.js') }}"></script>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 {% endblock %}
 
 
 {% block body %}
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Launch demo modal
-  </button>
+<button id="the-actual-modal-button" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Modal Button
+</button>
   
   <!-- Modal -->
   <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-dialog-scrollable">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header">  
           <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          ...
+            <p></p>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-secondary modal-btn" id="reject-btn" data-bs-dismiss="modal">Reject</button>
+          <button type="button" class="btn btn-primary modal-btn" value="accept" id="accept-btn">Accept</button>
         </div>
       </div>
     </div>
@@ -36,12 +37,14 @@
         <div class="dropdown open">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId-status" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
-                Incoming
+                Pending
             </button>
             <div class="dropdown-menu" id="status-filter-btn" aria-labelledby="triggerId">
-                <button class="dropdown-item status-filters" href="#">Incoming</button>
                 <button class="dropdown-item status-filters" href="#">Pending</button>
+                <button class="dropdown-item status-filters" href="#">Accepted</button>
+                <button class="dropdown-item status-filters" href="#">Ongoing</button>
                 <button class="dropdown-item status-filters" href="#">Completed</button>
+                <button class="dropdown-item status-filters" href="#">Rejected</button>
             </div>
         </div>
     </div>
@@ -66,15 +69,10 @@
                     <th scope="col">Name</th>
                     <th scope="col">Request</th>
                     <th scope="col">Date</th>
+                    <th scope="col">Status</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr class="">
-                    <td scope="row">R1C1</td>
-                    <td>R1C2</td>
-                    <td>R1C3</td>
-                </tr>
-            </tbody>
+            <tbody id="table-body"></tbody>
         </table>
     </div>
 
