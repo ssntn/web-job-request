@@ -1,5 +1,6 @@
 # 3rd Part thigns
 from flask import Flask, render_template, redirect, request, session, request, jsonify
+import json
 
 # Ian defined imports
 import routes as route
@@ -67,9 +68,11 @@ def loading():
             },
             'state': SERVICE_STATE.PENDING
         }
+        
+        response = db.create_request(data)
+        session['response_create'] = response
 
-        return db.create_request(data)
-        # return render_template(route.loading)
+        return render_template(route.loading)
 
 # Admin Routing 
 @app.route('/admin')
@@ -78,12 +81,27 @@ def admin_login():
 
 @app.route('/request')
 def request_page():
-    data = db.read_request()
-    return data
-    return render_template(route.request, data=data)
+    return render_template(route.request)
 
-
-
+# AJAX REQUESTS
+@app.route('/fetch_request', methods=["GET"])
+def fetch_request():
+    if request.method == 'GET':
+        data = db.read_request()
+        return data
+    
+    
+@app.route('/update_request/',  methods=['POST'])
+def update_request():
+    if request.method == 'POST':
+        data = request.get_json()
+        id = data['id']
+        state = data['state']
+        oic = data['oic']
+        print(data)
+        dates = { SERVICE_STATE.GET_STRING[data['state']] : get_today() }
+        response = db.update_request(id, state, oic, dates)
+        return response
 
 if __name__ == "__main__":
     app.run(debug=True)

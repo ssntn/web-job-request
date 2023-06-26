@@ -1,9 +1,11 @@
 from firebase_admin import credentials, firestore, initialize_app
-from flask import request, jsonify
+from flask import request, jsonify, make_response
+import json
+from uuid import uuid1
 
 from db_config import db 
 import db_config
-from uuid import uuid1
+from constants import SERVICE_STATE
 
 # DB init
 cred = credentials.Certificate("key.json")
@@ -34,9 +36,9 @@ def create_request(data):
     try:
         id = uuid1()
         requests_ref.document(str(id)).set(data)
-        return jsonify({"success": True}), 200
+        return True
     except Exception as e:
-        return {}
+        return False
 
 def read_request(id=None):
     try:
@@ -50,5 +52,13 @@ def read_request(id=None):
         else:
             l = [{'id':doc.id, 'data':doc.to_dict()} for doc in requests_ref.stream()]
             return l
+    except Exception as e:
+        return {}
+    
+def update_request(id, state, oic, dates):
+    try:
+        doc = requests_ref.document(id)
+        doc.set({state:state, oic:oic, dates:dates}, merge=True)
+        return make_response(jsonify(doc), 200)
     except Exception as e:
         return {}
