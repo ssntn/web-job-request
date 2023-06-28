@@ -17,18 +17,6 @@ db_config.db = db
 services_ref = db.collection('services')
 requests_ref = db.collection('request')
 
-def read_list():
-    try:
-        services_id = request.args.get('id')
-        if services_id:
-            q = services_ref.document(services_id).get()
-            return jsonify(q.to_dict()), 200
-        else:
-            l = [doc.to_dict() for doc in services_ref.stream()]
-            return jsonify(l), 200
-    except Exception as e:
-        return {}
-
 #####################################################################
 #                       Request CRUD
 
@@ -62,3 +50,34 @@ def update_request(id, state, oic, dates):
         return make_response(jsonify(doc), 200)
     except Exception as e:
         return {}
+    
+    
+#####################################################################
+#                       Services CRUD
+
+def read_services():
+    try:
+        services_id = request.args.get('id')
+        if services_id:
+            q = services_ref.document(services_id).get()
+            return jsonify(q.to_dict()), 200
+        else:
+            l = [doc.to_dict() for doc in services_ref.stream()]
+            return l
+    except Exception as e:
+        return {}
+    
+def read_services_value(name):
+    try:
+        if(not name or name is None): return {'Response', 'name error'}
+        query = services_ref.where('name', '==', name).get()
+        result = {}
+
+        if len(query) > 0:
+            doc = query[0]
+            result = doc.to_dict()
+
+        return {'value': result['value']}
+        
+    except Exception as e:
+        return {'Error Ian', e}

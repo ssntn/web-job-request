@@ -1,6 +1,7 @@
 # 3rd Part thigns
-from flask import Flask, render_template, redirect, request, session, request, jsonify
+from flask import Flask, render_template, redirect, request, session, request, jsonify, url_for
 import json
+import jsonpickle
 
 # Ian defined imports
 import routes as route
@@ -21,8 +22,12 @@ def get_today():
 #Routing
 @app.route('/')
 def index():
+    if 'response_create' in session: session.clear()
     return render_template(route.homepage)
 
+@app.route('/clear_session')
+def clear_session():
+    return redirect(url_for('index'))
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
@@ -82,28 +87,52 @@ def form_e():
 @app.route('/loading', methods=['POST'])
 def loading():
     if request.method == 'POST':
+        if('name' in session):
+            data = {
+                'user': {
+                    "name": session["name"],
+                    "email": session["email"],
+                    "contact": session["contact"]
+                },
+                'dates': {
+                    'requested': get_today(),
+                    'accepted': None,
+                    'completed': None
+                },
+                'service': {
+                    'name': session['service']
+                },
+                'state': SERVICE_STATE.PENDING,            
+            }
 
-        data = {
-            'user': {
-                "name": session["name"],
-                "email": session["email"],
-                "contact": session["contact"]
-            },
-            'service': {
-                'name': session["service"],
-                'type': request.form.get("service"),
-                'date': request.form.get("month") +" "+request.form.get("year"),
-            },
-            'dates': {
-                'requested': get_today(),
-                'accepted': None,
-                'completed': None
-            },
-            'state': SERVICE_STATE.PENDING
-        }
-        
-        response = de.create_request(data)
-        session['response_create'] = response
+            service = db.read_services_value(session['service'])['value']
+            
+            if(service is None): return 
+
+            if service == 0:
+                data.update({
+                    'service': {
+                        'type': request.form.get("service"),
+                        'date': request.form.get("month") +" "+request.form.get("year"),
+                    }
+                })
+            elif service == 1:
+                data.update({
+                    'service': {
+                        'type': request.form.get('service-type'),
+                        'account': request.form.get('account'),
+                        'entity': request.form.get('account-type'),
+                        'department': request.form.get('department'),
+                        'birthday': request.form.get('birthday')
+                    }
+                })
+            
+            response = db.create_request(data)
+            session['response_create'] = response
+            session.pop('name', None)
+            session.pop('email', None)
+            session.pop('contact', None)
+            session.pop('service', None)
 
         return render_template(route.loading)
 
