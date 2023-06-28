@@ -1,22 +1,22 @@
 {% extends 'base.html' %}
 
 {% block head %}
-<title>Homepage</title>
 {% endblock %}
 
 {% block body %}
 
 {% if session['response_create'] == True %}
-<div class="alert alert-success alert-dismissible fade show" role="alert">
-    <strong>Success!</strong> Please wait for your email confirmation.
-</div>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> Please wait for your email confirmation.
+    </div>
+    {{ session.clear() }}
 {% elif session['response_create'] == False %}
-<div class="alert alert-danger alert-dismissible fade show" role="alert">
-    <strong>Oh no!</strong> We didn't expect to lose your request.
-    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-</div>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Oh no!</strong> We didn't expect to lose your request.
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
 {% endif %}
 <div class="mt-5 mx-auto row" style="width: 95%;">
     
@@ -65,7 +65,7 @@
 
             <div class="row mx-auto">
                 <form method="POST" action="{{ url_for('form') }}" style="padding:2%;width: fit-content;">
-                    <button class="btn btn-danger btn-md text-wrap mx-auto">Request</button>
+                    <button class="btn btn-danger btn-lg text-wrap mx-auto">Request</button>
                 </form>
             </div>
 
