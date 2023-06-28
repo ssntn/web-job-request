@@ -1,0 +1,152 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<script src="{{ url_for('static', filename='js/b.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/b.css') }}">
+<title>Form A</title>
+{% endblock %}
+
+{% block body %}
+<div class="col w-75 mx-auto">
+    <div class="mt-5 border bg-white">
+        <form action="{{ url_for('loading') }}" method="post">
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if session.name %}
+                            <p>Name: {{ session.name }}</p>
+                            <p>Email: {{ session.email }}</p>
+                            <p>Contact number: {{ session.contact }}</p>
+                            <p>Service: {{ session.service }}</p>
+                            <p id="serv-modal">Service Type: Not yet selected</p>
+                            <p id="type-modal">Entity Type: Not yet selected</p>
+                            <p id="site-modal">Account: Not yet selected</p>
+                            <p id="dept-modal">Department: Not yet selected</p>
+                            <p id="date-modal">Birthday: Not yet selected</p>
+                        {% else %}
+                            <p>Some error occured.</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Request</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            
+            
+
+            <h3 class="w-100 py-5 text-center">TUP Account Managgement</h3>
+            <div class="mx-5">
+                
+                <!-- Service Picker -->
+                <p class="text-muted">Which one are you?</p>
+                <div class="form-check">
+                    <input class="form-check-input type-radio" type="radio" name="account-type" id="type-1" value="1" required>
+                    <label class="form-check-label" for="type-1">
+                        Student
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input type-radio" type="radio" name="account-type" id="type-2" value="2">
+                    <label class="form-check-label" for="type-2">
+                        Employee
+                    </label>
+                </div>
+                
+                <!-- Service -->
+                <p class="pt-3 text-muted">Please check desired services</p>
+                <div class="form-check">
+                    <input class="form-check-input service-radio" type="radio" name="service-type" id="service-1" value="1" required selecteds>
+                    <label class="form-check-label" for="service-1">
+                        Create account
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input service-radio" type="radio" name="service-type" id="service-2" value="2">
+                    <label class="form-check-label" for="service-2">
+                        Reset Password
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input service-radio" type="radio" name="service-type" id="service-3" value="3">
+                    <label class="form-check-label" for="service-3">
+                        Change of Data
+                    </label>
+                </div>
+                <!-- <div class="form-check">
+                    <input class="form-check-input service-radio" type="radio" name="service-type" id="service-4" value="4">
+                    <label class="form-check-label" for="service-4">
+                        Technical Support
+                    </label>
+                </div> -->
+                
+                
+                <!-- Account -->
+                <p class="pt-3 text-muted">Which account do you need help with?</p>
+                <div class="form-check">
+                    <input class="form-check-input account-radio" type="radio" name="account" id="account-1" value="1" required>
+                    <label class="form-check-label" for="account-1">
+                        TUP Portal
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input account-radio" type="radio" name="account" id="account-2" value="2">
+                    <label class="form-check-label" for="account-2">
+                        TUP MS Office 365 (MS Teams)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input account-radio" type="radio" name="account" id="account-3" value="3">
+                    <label class="form-check-label" for="account-3">
+                        ERS (Old System)
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input account-radio" type="radio" name="account" id="account-4" value="4">
+                    <label class="form-check-label" for="account-4">
+                        TUP Official Email
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input account-radio" type="radio" name="account" id="account-5" value="5">
+                    <label class="form-check-label" for="account-5">
+                        TUP Web ERS
+                    </label>
+                </div>
+                
+                <!-- Department -->
+                <p class="pt-3 text-muted">Which department are you in?</p>
+                <select name ="department"class="form-select" aria-label="Default select example">
+                    <option id="temporary" selected>Open this select menu</option>
+                    <option value="1">College of Science</option>
+                    <option value="2">College of Liberal Arts</option>
+                </select>
+
+                <!-- Birthday -->
+                <p class="pt-3 text-muted">Birthday</p>
+                <input type="date" name="birthday" id="birthday" required>
+            </div>
+        
+
+            <div class="page-control">
+                <button name="back" id="back-btn" class="btn btn-danger btn-lg" type="submit">Back</button>
+                <button id="modal-button" type="button" class="btn btn-danger btn-lg " data-bs-toggle="modal" data-bs-target="#exampleModal">Next</button>
+            </div>
+        </form>
+            
+    </div>
+</div>
+  
+
+{% endblock %}

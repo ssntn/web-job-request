@@ -39,10 +39,43 @@ def form_a():
         session["service"] = request.form.get("service")
         return render_template(route.service_a)
     
+@app.route('/form_b', methods=['POST'])
+def form_b():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_b)
     
-@app.route('/list', methods=['GET'])
-def read():
-    return db.read_list()
+@app.route('/form_c', methods=['POST'])
+def form_c():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_c)
+    
+@app.route('/form_d', methods=['POST'])
+def form_d():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_d)
+    
+@app.route('/form_e', methods=['POST'])
+def form_e():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_e)
+
+
 
     
 
@@ -69,7 +102,7 @@ def loading():
             'state': SERVICE_STATE.PENDING
         }
         
-        response = db.create_request(data)
+        response = de.create_request(data)
         session['response_create'] = response
 
         return render_template(route.loading)

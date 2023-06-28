@@ -2,9 +2,8 @@
 
 {% block head %}
 <title>Homepage</title>
-
 <script src="{{ url_for('static', filename='js/form.js') }}"></script>
-<script src="{{ url_for('static', filename='css/form.css') }}"></script>
+<!-- <script src="{{ url_for('static', filename='css/form.css') }}"></script> -->
 {% endblock %}
 
 
@@ -18,19 +17,19 @@
     
         <div class="row form-floating mb-3 mx-auto px-5">
             <input class="form-control" type="text" name="name" id="name" placeholder="Name:" required>
-            <label for="name" class="mx-auto" style="padding-left: 4em;">Name:</label>
+            <label for="name" class="w-25 ms-5 text-muted">Name:</label>
         </div>
         <div class="invalid-feedback">Please enter your name.</div>
     
         <div class="row form-floating mb-3 mx-auto px-5">
             <input class="form-control" type="email" name="email" id="email" placeholder="Email:" required>
-            <label for="email" class="mx-auto" style="padding-left: 4em;">Email:</label>
+            <label for="email" class="w-25 ms-5 text-muted">Email:</label>
         </div>
         <div class="invalid-feedback">Please enter your email.</div>    
     
         <div class="row form-floating mb-3 mx-auto px-5">
             <input class="form-control" type="number" name="contact" id="contact" placeholder="Contact Number:" required>
-            <label for="contact-number" class="mx-auto" style="padding-left: 4em;">Contact Number:</label>
+            <label for="contact-number" class="w-25 ms-5 text-muted">Contact Number:</label>
         </div>
         <div class="invalid-feedback">Please enter your contact number.</div>
     </div>
@@ -145,7 +144,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-1 col-md-1 col-sm-0"></div>
+        </div>
+        <div class="col-lg-1 col-md-1 col-sm-0"></div>
 
         </div>
     

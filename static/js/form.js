@@ -35,7 +35,6 @@ $(document).ready(function() {
     
     function toggle_checks(){
         var check = $("#terms").is(":checked") && client_data.service != "";
-        console.log(check);
         $("#service-selection-btn").attr('disabled', !check);
     }
 
