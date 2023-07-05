@@ -18,3 +18,7 @@
     bottom: 0;
     width: 100%;
 }
+
+a p, .aboutt {
+    font-size: 0.85em;
+}
