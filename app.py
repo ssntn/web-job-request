@@ -64,6 +64,7 @@ def form_c():
     
 @app.route('/form_d', methods=['POST'])
 def form_d():
+    #
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
         session["email"] = request.form.get("email")

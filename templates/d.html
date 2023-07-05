@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/d.js') }}"></script>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/d.css') }}">
+<title>Form d</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="col w-75 mx-auto">
+    <div class="mt-5 border bg-white">
+
+        <form action="{{ url_for('loading') }}" method="post">
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if session.name %}
+                            <p>Name: {{ session.name }}</p>
+                            <p>Email: {{ session.email }}</p>
+                            <p>Contact number: {{ session.contact }}</p>
+                            <p>Service: {{ session.service }}</p>
+                            <p id="serv-modal">Service Type: Not yet selected</p>
+                            <p id="type-modal">Entity Type: Not yet selected</p>
+                            <p id="site-modal">Account: Not yet selected</p>
+                            <p id="dept-modal">Department: Not yet selected</p>
+                            <p id="date-modal">Birthday: Not yet selected</p>
+                        {% else %}
+                            <p>Some error occured.</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Request</button>
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Modal -->
+        
+            <h3 class="w-100 pt-5 text-center">ICT Equipment</h3>
+            <div class="mx-5 pb-5">                
+                
+                <!-- Servzice Picker -->                
+                <p class="text-muted">Which one are you?</p>
+                <div class="form-check">
+                    <input class="form-check-input type-radio" type="radio" name="service-type" id="type-2" value="Repair and Maintenance">
+                    <label class="form-check-label" for="type-2">
+                        Repair and Maintenance
+                    </label>
+                </div>
+                <div class="form-check">
+                    <input class="form-check-input type-radio" type="radio" name="service-type" id="type-1" value="Request to Use" required>
+                    <label class="form-check-label" for="type-1">
+                        Request to Use
+                    </label>
+                </div>
+
+                
+                <p class="pt-3 text-muted">Which device do you need?</p>
+                <select id='devices' name ="devices" class="form-select" aria-label="Default select example">
+                    <option id="temporary" selected>Open this select menu</option>
+                    <option value="">Desktop Computer</option>
+                    <option value="">Laptop Computer</option>
+                    <option value="">Printer</option>
+                    <option value="">Photocopy Machine</option>
+                    <option value="">LED Wall</option>
+                    <option id="other" value="">Other</option>
+                </select>
+
+                <div class="py-3" id="other-device-div" style="display:none">
+                    <label for="other-device" class="text-muted">Your device</label>
+                    <input type="text" class="form-control" id="other-device" placeholder="Your Device" value="">
+                </div>
+                
+                
+                <div class="py-3" id="problem-div" style="display:none">
+                    <label for="location" class="text-muted">What were the problem(s)?</label>
+                    <textarea type="text" class="form-control" id="problem" placeholder="Input here" value=""></textarea>
+                </div>
+                
+                <div class="py-3">
+                    <label for="location" class="text-muted">Where should we go?</label>
+                    <input type="text" class="form-control" id="location" placeholder="Location" value="">
+                </div>
+            </div>
+            
+            <div class="page-control">
+                <button name="back" id="back-btn" class="btn btn-danger btn-lg" type="submit">Back</button>
+                <button id="modal-button" type="button" class="btn btn-danger btn-lg " data-bs-toggle="modal" data-bs-target="#exampleModal">Next</button>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}
