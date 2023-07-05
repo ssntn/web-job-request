@@ -4,7 +4,6 @@ $(document).ready(function() {
     var prob_div = $('#problem-div');
 
     $('.form-select').change(function(){ 
-        
         if($(this).attr('id')!='Temporary') $('#temporary').remove();
 
         if($(this).find(":selected").attr('id')==='other') $('#other-device-div').show();

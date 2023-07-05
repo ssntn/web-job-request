@@ -28,10 +28,11 @@
                             <p>Contact number: {{ session.contact }}</p>
                             <p>Service: {{ session.service }}</p>
                             <p id="serv-modal">Service Type: Not yet selected</p>
-                            <p id="type-modal">Entity Type: Not yet selected</p>
-                            <p id="site-modal">Account: Not yet selected</p>
-                            <p id="dept-modal">Department: Not yet selected</p>
-                            <p id="date-modal">Birthday: Not yet selected</p>
+                            <p id="dev-modal">Entity Type: Not yet selected</p>
+                            <p id="loc-modal">Account: Not yet selected</p>
+                            <p id="prob-modal">Department: Not yet selected</p>
+                            <p id="oth-dev-modal">Department: Not yet selected</p>
+                            
                         {% else %}
                             <p>Some error occured.</p>
                         {% endif %}
@@ -49,7 +50,7 @@
             <div class="mx-5 pb-5">                
                 
                 <!-- Servzice Picker -->                
-                <p class="text-muted">Which one are you?</p>
+                <p class="text-muted">Which service do you want?</p>
                 <div class="form-check">
                     <input class="form-check-input type-radio" type="radio" name="service-type" id="type-2" value="Repair and Maintenance">
                     <label class="form-check-label" for="type-2">
@@ -76,7 +77,7 @@
                 </select>
 
                 <div class="py-3" id="other-device-div" style="display:none">
-                    <label for="other-device" class="text-muted">Your device</label>
+                    <label for="other-device" class="text-muted">Other device?</label>
                     <input type="text" class="form-control" id="other-device" placeholder="Your Device" value="">
                 </div>
                 
@@ -87,7 +88,7 @@
                 </div>
                 
                 <div class="py-3">
-                    <label for="location" class="text-muted">Where should we go?</label>
+                    <label for="location" class="text-muted">Where can we find you?</label>
                     <input type="text" class="form-control" id="location" placeholder="Location" value="">
                 </div>
             </div>
