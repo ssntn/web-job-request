@@ -1,10 +1,10 @@
 $(document).ready(function() {
 
+    selected = {};
     // CHECKBOX
     $('.form-check-input').click(function(){
 
         if (!$(this).is(':checked')) {  
-            selected = {};
             return;
         } 
         
@@ -14,14 +14,13 @@ $(document).ready(function() {
     });
 
     // DROPDOWN
-    $('.dropdown-item').click(function(){
-        $('.dropdown-toggle').text($(this).text());
-        $('#month-input').val($(this).text());
+    $('#month').on('change', function(){        
+        $('#month-input').val($('#month').find(":selected").text());
     });
 
     $("#modal-button").click(function(){
         $("#service-modal").text("Type: "+$('input[name="service"]:checked').val());
-        $("#date-modal").text("Date: "+$("#triggerId").text() +" "+ $("#year").val());
+        $("#date-modal").text("Date: "+$('#month').find(":selected").text() +" "+ $("#year").val());
     })
 
 });
