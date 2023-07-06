@@ -1,0 +1,64 @@
+
+{% extends 'base.html' %}
+
+{% block head %}
+<script src="{{ url_for('static', filename='js/g.js') }}"></script>
+<!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/d.css') }}"> -->
+<title>Form d</title>
+{% endblock %}
+
+
+{% block body %}
+<div class="col col-lg-6 col-l-6 col-md-8 col-sm-10 col-11 mx-auto">
+    <div class="mt-5 bg-white rounded-4 shadow-lg">
+
+        <form action="{{ url_for('loading') }}" method="post">
+            
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Request Confirmation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        {% if session.name %}
+                            <p>Name: {{ session.name }}</p>
+                            <p>Email: {{ session.email }}</p>
+                            <p>Contact number: {{ session.contact }}</p>
+                            <p>Service: {{ session.service }}</p>
+                            <p id="serv-modal">Service Type: Not yet selected</p>
+                            <p id="dev-modal">Entity Type: Not yet selected</p>
+                            <p id="loc-modal">Account: Not yet selected</p>
+                            <p id="prob-modal">Department: Not yet selected</p>
+                            <p id="oth-dev-modal">Department: Not yet selected</p>
+                            
+                        {% else %}
+                            <p>Some error occured.</p>
+                        {% endif %}
+                    </div>
+                    <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-danger">Request</button>
+                    </div>
+                </div>
+                </div>
+            </div>  
+            <!-- Modal -->
+
+            
+            <h3 class="w-100 pt-5 text-center">Data, Documents & Reports</h3>
+            <p class=" fs-5 fw-light text-center text-muted pb-5">only handled by UITC</h5>
+
+            <div class="mx-5 pb-5">
+                <div class="mb-3">
+                  <label class="text-muted" for="docu" class="form-label">Which service do you want?</label>
+                  <textarea class="form-control" name="docu" id="docu" placeholder="Input here" rows="6"></textarea>
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
+{% endblock %}
