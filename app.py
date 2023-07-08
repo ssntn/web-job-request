@@ -1,12 +1,11 @@
 # 3rd Part thigns
 from flask import Flask, render_template, redirect, request, session, request, jsonify, url_for
-import json
-import jsonpickle
 
 # Ian defined imports
 import routes as route
 import db_config, db
 from constants import SERVICE_STATE
+
 
 # App config
 app = Flask(__name__)
@@ -80,10 +79,17 @@ def form_e():
         session["contact"] = request.form.get("contact")
         session["service"] = request.form.get("service")
         return render_template(route.service_e)
-
-
-
     
+@app.route('/form_f', methods=['POST'])
+def form_f():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_f)
+
+
 
 @app.route('/loading', methods=['POST'])
 def loading():
@@ -105,27 +111,32 @@ def loading():
                 },
                 'state': SERVICE_STATE.PENDING,            
             }
-
-            service = db.read_services_value(session['service'])['value']
+        
+            s = session['service']
+            q = db.read_services_value(s)
             
-            if(service is None): return 
+            if(q is None or q == False): return jsonify({'error', 'errooooor'}, 400)
+            service = q['value']
 
             if service == 0:
-                data.update({
-                    'service': {
-                        'type': request.form.get("service"),
-                        'date': request.form.get("month") +" "+request.form.get("year"),
-                    }
+                data['service'].update({
+                    'type': request.form.get("service"),
+                    'date': request.form.get("month") +" "+request.form.get("year"),
                 })
             elif service == 1:
-                data.update({
-                    'service': {
-                        'type': request.form.get('service-type'),
-                        'account': request.form.get('account'),
-                        'entity': request.form.get('account-type'),
-                        'department': request.form.get('department'),
-                        'birthday': request.form.get('birthday')
-                    }
+                data['service'].update({
+                    'type': request.form.get('service-type'),
+                    'account': request.form.get('account'),
+                    'entity': request.form.get('account-type'),
+                    'department': request.form.get('department'),
+                    'birthday': request.form.get('birthday')
+                })
+            elif service == 2:
+                data['service'].update({
+                    'type': request.form.get('service-type'),
+                    'connection-type': request.form.get('connection-type'),
+                    'location': request.form.get('location'),
+                    'problem': request.form.get('problem'),
                 })
             
             response = db.create_request(data)
@@ -134,6 +145,9 @@ def loading():
             session.pop('email', None)
             session.pop('contact', None)
             session.pop('service', None)
+
+        else:
+            return 'Error'
 
         return render_template(route.loading)
 

@@ -17,8 +17,8 @@ db_config.db = db
 services_ref = db.collection('services')
 requests_ref = db.collection('request')
 
-#####################################################################
-#                       Request CRUD
+################################################################################
+#                               Request CRUD
 
 def create_request(data):
     try:
@@ -52,8 +52,8 @@ def update_request(id, state, oic, dates):
         return {}
     
     
-#####################################################################
-#                       Services CRUD
+################################################################################
+#                               Services CRUD
 
 def read_services():
     try:

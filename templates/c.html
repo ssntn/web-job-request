@@ -22,15 +22,22 @@
                     </div>
                     <div class="modal-body">
                         {% if session.name %}
-                            <p>Name: {{ session.name }}</p>
-                            <p>Email: {{ session.email }}</p>
-                            <p>Contact number: {{ session.contact }}</p>
-                            <p>Service: {{ session.service }}</p>
-                            <p id="serv-modal">Service Type: Not yet selected</p>
-                            <p id="type-modal">Entity Type: Not yet selected</p>
-                            <p id="site-modal">Account: Not yet selected</p>
-                            <p id="dept-modal">Department: Not yet selected</p>
-                            <p id="date-modal">Birthday: Not yet selected</p>
+                            <p><b>Name:</b> {{ session.name }}</p>
+                            <p><b>Email: </b>{{ session.email }}</p>
+                            <p><b>Contact number: </b>{{ session.contact }}</p>
+                            <p><b>Service: </b>{{ session.service }}</p>
+                            <p><b>Service Type: </b>
+                                <span id="serv-modal">Not yet selected</span>
+                            </p>
+                            <p><b>Connection Type:</b>
+                                <span id="conn-modal"> Not yet selected</span>
+                            </p>
+                            <p><b>Location:</b>
+                                <span id="loc-modal"> Not yet selected</span>
+                            </p>
+                            <p><b>Problem:</b>
+                                <span id="prob-modal"> Not yet selected</span>
+                            </p>
                         {% else %}
                             <p>Some error occured.</p>
                         {% endif %}
@@ -50,7 +57,7 @@
                 
                 
                 <!-- Service Picker -->
-                <p class="text-muted">Which one are you?</p>
+                <p class="text-muted">Which service do you need?</p>
                 <div class="form-check">
                     <input class="form-check-input type-radio" type="radio" name="service-type" id="type-1" value="New Connection" required>
                     <label class="form-check-label" for="type-1">
@@ -81,19 +88,19 @@
                 <div class="form-check">
                     <input class="form-check-input type-radio" type="radio" name="connection-type" id="connection-type-3" value="Telephon">
                     <label class="form-check-label" for="connection-type-3">
-                        Telephone   
+                        Telephone 
                     </label>
                 </div>
                    
                 <div class="py-3">
                     <label for="location" class="text-muted">Where should we go?</label>
-                    <input type="text" class="form-control" id="location" placeholder="Location" value="">
+                    <input type="text" class="form-control" name="location" id="location" placeholder="Location" value="">
                 </div>
 
 
                 <div class="" id="problem-div">
                     <label for="problem" class="text-muted">Your problems encountered?</label>
-                    <textarea style="height: 100px" class="form-control" placeholder="Problems occured" id="problem"></textarea>
+                    <textarea style="height: 100px" class="form-control" name="problem" placeholder="Problems occured" id="problem"></textarea>
                 </div>
 
             </div>
