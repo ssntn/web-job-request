@@ -6,9 +6,6 @@ $(document).ready(function() {
     });
 
     $("#modal-button").click(function(){
-        // $("#service-modal").text("Type: "+$('input[name="service"]:checked').val());
-        // $("#date-modal").text("Date: "+$("#triggerId").text() +" "+ $("#year").val());
-
         var serv = $('input[name="service-type"]:checked');
         var at = $('input[name="account-type"]:checked');
         var a = $('input[name="account"]:checked');

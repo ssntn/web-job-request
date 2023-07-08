@@ -138,6 +138,14 @@ def loading():
                     'location': request.form.get('location'),
                     'problem': request.form.get('problem'),
                 })
+            elif service == 3:
+                data['service'].update({
+                    'type': request.form.get('service-type'),
+                    'device': request.form.get('devices'),
+                    'other-devices': request.form.get('other-device'),
+                    'problem': request.form.get('problem'),
+                    'location': request.form.get('location'),
+                })
             
             response = db.create_request(data)
             session['response_create'] = response
@@ -146,9 +154,7 @@ def loading():
             session.pop('contact', None)
             session.pop('service', None)
 
-        else:
-            return 'Error'
-
+        else: return 'Error'
         return render_template(route.loading)
 
 # Admin Routing 

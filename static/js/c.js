@@ -15,9 +15,6 @@ $(document).ready(function() {
 
     
     $("#modal-button").click(function(){
-        // $("#service-modal").text("Type: "+$('input[name="service"]:checked').val());
-        // $("#date-modal").text("Date: "+$('#month').find(":selected").text() +" "+ $("#year").val());
-        // $("#service-modal").text("Type: "+$('input[name="service"]:checked').val());
         
         m_serv.text($('input[name="service-type"]:checked').val())
         m_con.text($('input[name="connection-type"]:checked').val());
@@ -32,7 +29,7 @@ $(document).ready(function() {
                 : "N/A"
             
         );
-    })
+    });
 
 });
 
