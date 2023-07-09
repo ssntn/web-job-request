@@ -4,6 +4,7 @@ from flask import Flask, render_template, redirect, request, session, request, j
 # Ian defined imports
 import routes as route
 import db_config, db
+from utils import today
 from constants import SERVICE_STATE
 
 
@@ -13,10 +14,7 @@ app.config["SESSION_PERMANENT"] = False
 app.secret_key = "23456789"
 app.config["SESSION_TYPE"] = 'filesystem'
 
-from datetime import datetime
-def get_today():
-    now = datetime.now()
-    return now.strftime("%m/%d/%Y")
+
 
 #Routing
 @app.route('/')
@@ -111,7 +109,7 @@ def loading():
                     "contact": session["contact"]
                 },
                 'dates': {
-                    'requested': get_today(),
+                    'requested': today(),
                     'accepted': None,
                     'completed': None
                 },

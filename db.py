@@ -2,6 +2,7 @@ from firebase_admin import credentials, firestore, initialize_app
 from flask import request, jsonify, make_response
 import json
 from uuid import uuid1
+from utils import db_today
 
 from db_config import db 
 import db_config
@@ -22,8 +23,9 @@ requests_ref = db.collection('request')
 
 def create_request(data):
     try:
-        id = uuid1()
-        requests_ref.document(str(id)).set(data)
+        gen = uuid1()
+        id = db_today() + '-' + str(gen)
+        requests_ref.document(id).set(data)
         return True
     except Exception as e:
         return False
@@ -47,9 +49,9 @@ def update_request(id, state, oic, dates):
     try:
         doc = requests_ref.document(id)
         doc.set({state:state, oic:oic, dates:dates}, merge=True)
-        return make_response(jsonify(doc), 200)
+        return True
     except Exception as e:
-        return {}
+        return False
     
     
 ################################################################################
