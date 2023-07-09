@@ -118,11 +118,14 @@ def loading():
             if(q is None or q == False): return jsonify({'error', 'errooooor'}, 400)
             service = q['value']
 
+            # A
             if service == 0:
                 data['service'].update({
                     'type': request.form.get("service"),
                     'date': request.form.get("month") +" "+request.form.get("year"),
                 })
+
+            # B
             elif service == 1:
                 data['service'].update({
                     'type': request.form.get('service-type'),
@@ -131,6 +134,8 @@ def loading():
                     'department': request.form.get('department'),
                     'birthday': request.form.get('birthday')
                 })
+
+            # C
             elif service == 2:
                 data['service'].update({
                     'type': request.form.get('service-type'),
@@ -138,6 +143,8 @@ def loading():
                     'location': request.form.get('location'),
                     'problem': request.form.get('problem'),
                 })
+
+            # D
             elif service == 3:
                 data['service'].update({
                     'type': request.form.get('service-type'),
@@ -146,6 +153,27 @@ def loading():
                     'problem': request.form.get('problem'),
                     'location': request.form.get('location'),
                 })
+                
+            # e
+            elif service == 4:
+                s = request.form.get('service-type')
+                
+                data['service'].update({
+                    'type': s,
+                })
+
+                if "install" in s.lower():
+                    data['service'].update({
+                        'software': request.form.get('sub-serv'),
+                    })
+                elif 'post' in s.lower():
+                    data['service'].update({
+                        'website': request.form.get('sub-serv'),
+                        'author': request.form.get('author'),
+                        'editor': request.form.get('editor'),
+                        'from': request.form.get('from'),
+                        'to': request.form.get('to')
+                    })
             
             response = db.create_request(data)
             session['response_create'] = response

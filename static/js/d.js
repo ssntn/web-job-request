@@ -33,8 +33,6 @@ $(document).ready(function() {
         if(m_odev.text().toLowerCase().includes("not")) m_odev.parent().hide()
         else m_odev.parent().show();
         
-
-        
         m_pro.text(
             ($('#problem').val() != "")
                 ? $('#problem').val()
