@@ -18,7 +18,7 @@ $(document).ready(function() {
 
         if(collapsed){
             client_data.service = selected.slice(-1);
-            $("#service-form").attr("action", "/form_"+client_data.service);
+            $("#service-form").attr("action", "/form/"+client_data.service);
         }else {
             client_data.service = "";
             $("#service-form").attr("action", "");

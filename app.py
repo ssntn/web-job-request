@@ -34,7 +34,7 @@ def form():
         return render_template(route.forms)
     
 
-@app.route('/form_a', methods=['POST'])
+@app.route('/form/a', methods=['POST'])
 def form_a():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
@@ -43,7 +43,7 @@ def form_a():
         session["service"] = request.form.get("service")
         return render_template(route.service_a)
     
-@app.route('/form_b', methods=['POST'])
+@app.route('/form/b', methods=['POST'])
 def form_b():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
@@ -52,7 +52,7 @@ def form_b():
         session["service"] = request.form.get("service")
         return render_template(route.service_b)
     
-@app.route('/form_c', methods=['POST'])
+@app.route('/form/c', methods=['POST'])
 def form_c():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
@@ -61,7 +61,7 @@ def form_c():
         session["service"] = request.form.get("service")
         return render_template(route.service_c)
     
-@app.route('/form_d', methods=['POST'])
+@app.route('/form/d', methods=['POST'])
 def form_d():
     #
     if request.method == 'POST':        
@@ -71,7 +71,7 @@ def form_d():
         session["service"] = request.form.get("service")
         return render_template(route.service_d)
     
-@app.route('/form_e', methods=['POST'])
+@app.route('/form/e', methods=['POST'])
 def form_e():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
@@ -80,7 +80,7 @@ def form_e():
         session["service"] = request.form.get("service")
         return render_template(route.service_e)
     
-@app.route('/form_f', methods=['POST'])
+@app.route('/form/f', methods=['POST'])
 def form_f():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
@@ -88,6 +88,15 @@ def form_f():
         session["contact"] = request.form.get("contact")
         session["service"] = request.form.get("service")
         return render_template(route.service_f)
+        
+@app.route('/form/g', methods=['POST'])
+def form_g():
+    if request.method == 'POST':        
+        session["name"] = request.form.get("name")
+        session["email"] = request.form.get("email")
+        session["contact"] = request.form.get("contact")
+        session["service"] = request.form.get("service")
+        return render_template(route.service_g)
 
 
 
@@ -174,6 +183,18 @@ def loading():
                         'from': request.form.get('from'),
                         'to': request.form.get('to')
                     })
+                    
+            # f
+            elif service == 5:
+                data['service'].update({
+                    'type': request.form.get('service-type')
+                })
+                    
+            # g
+            elif service == 6 or service == 7:
+                data['service'].update({
+                    'type': request.form.get('service-type')
+                })
             
             response = db.create_request(data)
             session['response_create'] = response
@@ -184,6 +205,11 @@ def loading():
 
         else: return 'Error'
         return render_template(route.loading)
+    
+
+@app.route('/error')
+def error():
+    return 'Error'
 
 # Admin Routing 
 @app.route('/admin')
