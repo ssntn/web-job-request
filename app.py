@@ -7,6 +7,7 @@ import db_config, db
 from utils import today
 from constants import SERVICE_STATE
 
+from pprint import pprint
 
 # App config
 app = Flask(__name__)
@@ -25,6 +26,10 @@ def index():
 @app.route('/clear_session')
 def clear_session():
     return redirect(url_for('index'))
+
+@app.route('/error')
+def error():
+    return render_template(route.error)
 
 @app.route('/form', methods=['GET', 'POST'])
 def form():
@@ -203,11 +208,6 @@ def loading():
 
         else: return 'Error'
         return render_template(route.loading)
-    
-
-@app.route('/error')
-def error():
-    return 'Error'
 
 # Admin Routing 
 @app.route('/admin')
@@ -216,13 +216,25 @@ def admin_login():
 
 @app.route('/request')
 def request_page():
-    return render_template(route.request)
+    services = db.read_services()
+    states = db.read_states()
+
+
+# sorted(services, key=lambda x: x['value'])
+# , services = sorted(services, key=lambda x: x['value'])
+    # return str(sorted(states, key=lambda x: x['value']))
+    
+    return render_template(route.request, services = sorted(services, key=lambda x: x['value']))
 
 # AJAX REQUESTS
 @app.route('/fetch_request', methods=["GET"])
 def fetch_request():
     if request.method == 'GET':
-        data = db.read_request()
+        # state_filter = request.args.get('state_filter')
+        # service_filter = request.args.get('service_filter')
+        # print(state_filter)
+        # print(service_filter)
+        data = db.read_request()    
         return data
     
     
@@ -234,9 +246,18 @@ def update_request():
         state = data['state']
         oic = data['oic']
         print(data)
-        dates = { SERVICE_STATE.GET_STRING[data['state']] : get_today() }
+        dates = { SERVICE_STATE.GET_STRING[data['state']] : today() }
         response = db.update_request(id, state, oic, dates)
         return response
+    
+    
+@app.route('/api-test',  methods=['GET'])
+def api_test(val=None):
+    if(val): return val
+    data = db.read_services()
+    # print(type(data))
+    return data
+
 
 if __name__ == "__main__":
     app.run(debug=True)

@@ -4,16 +4,19 @@ $(document).ready(function() {
     $('.status-filters').click(function(){
         $('#triggerId-status').text($(this).text());
     });
-    
+
     $('.service-filters').click(function(){
-        $('#triggerId-service').text($(this).text());
+        var ser = $(this).text();
+        $('#triggerId-service').text(ser);
+        $('#table-body').empty();
+        add_rows(ser=ser)
     });
 
     // MODAL
-    $("#modal-button").click(function(){
-        $("#service-modal").text("Service: "+$('input[name="service"]:checked').val());
-        $("#date-modal").text("Date: "+$("#triggerId").text() +" "+ $("#year").val());
-    })
+    // $("#modal-button").click(function(){
+    //     $("#service-modal").text("Service: "+$('input[name="service"]:checked').val());
+    //     $("#date-modal").text("Date: "+$("#triggerId").text() +" "+ $("#year").val());
+    // })
 
     // UTILS    
     const SERVICE_STATE = {
@@ -35,7 +38,7 @@ $(document).ready(function() {
     $('.modal').on('hidden.bs.modal', function (e) {
         $('.modal-body').empty();
     });
-
+    
     function get_status (status) {
         if (status === 0) return 'REJECTED';
         else if(status === 1) return 'PENDING';
@@ -92,10 +95,13 @@ $(document).ready(function() {
     });
 
     // Server side
-    function add_rows() {
-        read_request().then(function(data) {
-            if (data !== null) {
-                JSON.parse(data).forEach(function(element) {
+    function add_rows(state_filter = null, service_filter = null) {
+        read_request(id = null, state_filter, service_filter).then(data => {
+            if (data != null) {
+                JSON.parse(data).forEach(element => {
+                    if (service_filter != null && service_filter != element.service_filter) return;
+                    if (state_filter != null && state_filter != element.data);
+
                     var row = $('<tr></tr>');
                     row.attr('id', element.id);
                     row.attr('class', 'request-data-row');
@@ -105,7 +111,8 @@ $(document).ready(function() {
                     row.append($('<td></td>').text(get_status(element.data.state)));
                     $("#table-body").append(row);
                 });
-            } else {
+
+            } else if(data == null){
                 var row = $('<tr></tr>');
                 row.append($('<td colspan="3">').text("No data"));
                 $("#table-body").append(row);
@@ -115,65 +122,46 @@ $(document).ready(function() {
     
     function update_request(id, status = SERVICE_STATE.ACCEPTED, oic = null){
         data = {'id': id, 'state': status, 'oic': oic}
-        $.ajax({
-            // headers: {
-            //     'Accept': 'application/json',
-            //     'Content-Type': 'application/json' 
-            // },            
+        $.ajax({         
+
             type: 'POST', 
             url: '/update_request/',
             data: JSON.stringify(data),
             contentType: 'application/json', 
-            success: function(response) {
+
+            success: (response) => {
                 alert(response);
-            },
-            error: function(xhr, status, error) {
+
+            }, error: (xhr, status, error) => {
                 alert(error);
-            }
-        });
         
+        }});  
     }
 
-
-    function read_request(id = null, state_filter = null, service_filter = null) {
-        return new Promise(function(resolve, reject) {
-            fetch('/fetch_request').then(function(response) {
+    read_request = (id = null, state_filter = null, service_filter = null) => {
+        return new Promise((resolve, reject) => {
+            fetch(`/fetch_request?id=${id}&state_filter=${state_filter}&service_filter=${service_filter}`, {
+                method: 'GET'
+            })
+              .then((response) => {
                 return response.json();
-            }).then(function(data) {
 
+            }).then((data) => {                
                 // id filter
                 if (id) {
-                    if (data) {
-                        var foundData = data.find(function(element) {
-                            return element.id === id;
-                        });
-                        resolve(foundData || null);
-                    } else resolve(null);
+                    var foundData = data.find(element => { return element.id === id; });
+                    resolve(foundData || null);
+                    
                 } 
                 //   NO ID
-                else {
+                else resolve(JSON.stringify(data) || null);
+                
 
-                    if (data) {
-                        var filtered = data
-
-                        if(state_filter) filtered = data.find(function(element) {
-                            return element.state === state_filter;
-                        });
-
-                        if(service_filter) filtered = data.find(function(element) {
-                            return element.service.name === service_filter;
-                        });
-
-                        resolve(JSON.stringify(filtered) || null);
-                    } else resolve(null);
-                }
-            }).catch(function(error) {
+            }).catch((error) => {
                 reject(error);
-            });
-        });
+        });})
+
     }
-      
-    
-    // Function Calls
-    add_rows()
+
+    add_rows();
 });

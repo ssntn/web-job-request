@@ -40,11 +40,11 @@
                 Pending
             </button>
             <div class="dropdown-menu" id="status-filter-btn" aria-labelledby="triggerId">
-                <button class="dropdown-item status-filters" href="#">Pending</button>
-                <button class="dropdown-item status-filters" href="#">Accepted</button>
-                <button class="dropdown-item status-filters" href="#">Ongoing</button>
-                <button class="dropdown-item status-filters" href="#">Completed</button>
-                <button class="dropdown-item status-filters" href="#">Rejected</button>
+                <button class="dropdown-item status-filters" value="1">Pending</button>
+                <button class="dropdown-item status-filters" value="2">Accepted</button>
+                <button class="dropdown-item status-filters" value="3">Ongoing</button>
+                <button class="dropdown-item status-filters" value="4">Completed</button>
+                <button class="dropdown-item status-filters" value="0">Rejected</button>
             </div>
         </div>
     </div>
@@ -57,7 +57,14 @@
             </button>
             <div class="dropdown-menu" id="service-filter-btn" aria-labelledby="triggerId">
                 <button class="dropdown-item btn-danger service-filters" href="#">All</button>
-                <button class="dropdown-item btn-danger service-filters">Attendance Record</button>
+                {% if services %}
+                    {% for i in services %}
+                        <button class="dropdown-item btn-danger service-filters">{{i['name']}}</button>
+                    {% endfor %}
+                {% else %}
+                    
+                {% endif %}
+          
             </div>
         </div>
     </div>
