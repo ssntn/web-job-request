@@ -22,3 +22,11 @@
 a p, .aboutt {
     font-size: 0.85em;
 }
+
+.navbar-nav .nav-item:hover > .nav-link,
+.navbar-nav .nav-item:focus > .nav-link {
+    
+    transition: color 0.3s ease-in-out;
+    color: var(--primary-color);
+}
+

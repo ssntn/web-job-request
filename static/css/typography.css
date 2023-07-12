@@ -24,36 +24,31 @@ footer div div div ul li a p:hover {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (max-width: 600px) {
     #uitc {
-        font-size: 0.6em;
+        font-size: 0.55rem;
     }
-    body {font-size: 0.80em;}
+    body {font-size: 0.65rem;}
 
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (max-width: 768px) {
     #uitc {
-        font-size: 0.6em;
+        font-size: 0.6rem;
     }
-    body {font-size: 0.7em;}
-    
+    body {font-size: 0.7rem;}
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (max-width: 992px) {
     
     #uitc {
-        font-size: 0.5em;
+        font-size: 0.65rem;
     }
-    body {font-size: 1.25em;}
+    body {font-size: 0.8rem;}
     
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (max-width: 1200px) {
     
-    #uitc {
-        font-size: 0.7em;
-    }
-    body {font-size: 1.25em;}
 }
