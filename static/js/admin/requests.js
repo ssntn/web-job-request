@@ -11,10 +11,8 @@ $(document).ready(function() {
     $('.service-filters').click(function(){
         var ser = $(this).val();
         var sta = $('.status-filters').val();
-
         $('#triggerId-service').text((ser=='null')?'All':ser);
-        alert(ser);
-        add_rows(status_filter=sta,service_filter=ser)
+        add_rows(status_filter=sta,service_filter=ser);
     });
 
     // UTILS    
