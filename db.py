@@ -1,12 +1,13 @@
 from firebase_admin import credentials, firestore, initialize_app
 from flask import request, jsonify, make_response
+from google.cloud.firestore_v1.base_query import FieldFilter
 import json
 from uuid import uuid1
-from utils import db_today
 
-from db_config import db 
 import db_config
+from db_config import db 
 from constants import SERVICE_STATE
+from utils import today, db_today
 
 # DB init
 cred = credentials.Certificate("key.json")
@@ -17,6 +18,7 @@ db_config.db = db
 # Collection references 
 services_ref = db.collection('services')
 requests_ref = db.collection('request')
+state_ref = db.collection('request_state')
 
 ################################################################################
 #                               Request CRUD
@@ -30,44 +32,65 @@ def create_request(data):
     except Exception as e:
         return False
 
-def read_request(id=None):
+def read_request(id=None, state_filter=None, service_filter=None):
     try:
-        if id:
-            request_id = request.args.get(id)
-            doc = services_ref.document(request_id).get()
-            q = {}
-            q['id'] = doc.id
-            q['data'] = doc
-            return q.to_dict()
+        if id and id != 'null':
+            doc = requests_ref.document(id).get()
+            print({'id': id})
+            return {'id': doc.id, 'data': doc}.to_dict()
+        
         else:
-            l = [{'id':doc.id, 'data':doc.to_dict()} for doc in requests_ref.stream()]
+            q = requests_ref
+            
+            # if service_filter:
+            #     try:
+            #         q = q.where('service.name', '==', service_filter)
+            #     except Exception:
+            #         q = requests_ref
+
+            if state_filter or state_filter == 0:
+                try:
+                    q = q.where('state', '==', state_filter)
+                except Exception:
+                    q = requests_ref
+                    
+            l = [{'id':doc.id, 'data':doc.to_dict()} for doc in q.get()]
+            print({'siya': l})
             return l
     except Exception as e:
-        return {}
+        return str({'errror': e})
     
-def update_request(id, state, oic, dates):
+def update_request(id, state, reject=None):
     try:
         doc = requests_ref.document(id)
-        doc.set({state:state, oic:oic, dates:dates}, merge=True)
-        return True
+        data = {
+            'state': state+1,
+            'dates' : {
+                SERVICE_STATE.DATE[state+1]: today()
+            }
+        }
+        doc.set(data, merge=True)
+        return str({'response', True})
     except Exception as e:
-        return False
+        return str({'response': {'error': e}})
     
     
 ################################################################################
 #                               Services CRUD
 
-def read_services():
+def read_services(id=None):
     try:
         services_id = request.args.get('id')
+        q = services_ref
         if services_id:
-            q = services_ref.document(services_id).get()
+            q = q.document(services_id).get()
             return jsonify(q.to_dict()), 200
         else:
-            l = [doc.to_dict() for doc in services_ref.stream()]
-            return l
+            q = q.get()
+            return [doc.to_dict() for doc in q]
+        
     except Exception as e:
-        return {}
+        return {'eror': e}
     
 def read_services_value(name):
     try:
@@ -83,3 +106,15 @@ def read_services_value(name):
         
     except Exception as e:
         return {'Error Ian', e}
+    
+
+################################################################################
+#                                   Utils CRUD
+
+def read_states():
+    try:
+        l = [doc.to_dict() for doc in state_ref.stream()]
+        return l
+    except Exception as e:
+        return False
+    
