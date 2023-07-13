@@ -212,16 +212,13 @@ def loading():
 def admin_login():
     return render_template(route.admin_login)
 
+@app.route('/profile')
+def profile():
+    return render_template(route.profile)
+
 @app.route('/request')
 def request_page():
-    services = db.read_services()
-    # states = db.read_states()
-
-
-    # sorted(services, key=lambda x: x['value'])
-    # , services = sorted(services, key=lambda x: x['value'])
-        # return str(sorted(states, key=lambda x: x['value']))
-    
+    services = db.read_services()    
     return render_template(route.request, services = sorted(services, key=lambda x: x['value']))
 
 # AJAX REQUESTS

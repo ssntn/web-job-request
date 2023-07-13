@@ -1,0 +1,46 @@
+{% extends 'admin/base.html' %}
+
+{% block head %}
+<title>Job Request | Admin</title>
+{% endblock %}
+
+
+{% block body %}
+
+<!-- <div class="d-flex flex-column w-50 mx-auto bg-white rounded border py-5 my-5"> -->
+<div class="row w-75 mx-auto d-none">
+    <div class="row">
+        Personal Info
+    </div>
+
+    <div class="row">
+        <!-- <form action="" method="post"></form> -->
+        <div class="col col-lg-4 bg-white rounded border">
+            <div class="row pt-5">
+                <img class="rounded-circle w-25 h-25" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png" alt="User" width="50px" height="200px">
+            </div>
+            <div class="row text-center h3 py-3">
+                <p>Name</p>
+            </div>
+        </div>
+        <div class="col col-lg-7 bg-white rounded border">
+            <p>aeisfkds</p>
+            <p>adsfpol;</p>
+        </div>
+    </div>    
+
+</div>
+    <!-- </div> -->
+<div class="d-flex justify-content-center align-self-stretch py-5 my-5">
+    <div>
+        <img class="mx-auto row pb-3" src="{{ url_for('static', filename='svg/construction.svg') }}" width="50%" alt="Construction">
+        <h4 class="text-muted fw-light text-center pt-3 lh-sm">Were still under construction.</h3>
+        <h4 class="text-muted fw-light text-center pt-3 lh-sm">But you can still go back!</h3>
+    </div>
+</div>
+
+{% endblock %}
+
+
+Under construction
+Building

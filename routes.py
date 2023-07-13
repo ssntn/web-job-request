@@ -13,4 +13,5 @@ error = 'utils/error.html'
 
 # admin
 admin_login = 'admin/login.html'
+profile = 'admin/profile.html'
 request = 'admin/requests.html'
