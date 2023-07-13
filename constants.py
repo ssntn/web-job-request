@@ -8,6 +8,7 @@ class SERVICE_STATE:
     COMPLETED = 4
 
     GET_STRING = ['rejected', 'pending', 'accepted', 'ongoing', 'completed']
+    DATE = ['rejected', 'requested', 'accepted', 'ongoing', 'completed']
 
     # {
     #     "dates":{"accepted":None,"completed":None,"requested":"06/25/2023"},

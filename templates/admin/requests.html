@@ -3,37 +3,47 @@
 {% block head %}
 <title>Job Request | Admin</title>
 <script src="{{ url_for('static', filename='js/admin/requests.js') }}"></script>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
 {% endblock %}
 
 
 {% block body %}
+
+
 <!-- Button trigger modal -->
 <button id="the-actual-modal-button" type="button" class="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Modal Button
 </button>
   
   <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-scrollable">
-      <div class="modal-content">
+        <div class="modal-content">
         <div class="modal-header">  
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
+
         <div class="modal-body">
             <p></p>
+            
+            <div id="loading-modal">
+                <div class="container d-flex flex-column align-items-center py-5">
+                    <div class="spinner-border text-primary" role="status">
+                    </div>
+                </div>    
+            </div>
         </div>
+        
         <div class="modal-footer">
-          <button type="button" class="btn btn-secondary modal-btn" id="reject-btn" data-bs-dismiss="modal">Reject</button>
-          <button type="button" class="btn btn-primary modal-btn" value="accept" id="accept-btn">Accept</button>
+            <button type="button" class="btn btn-secondary modal-btn" value="reject" id="reject-btn" data-bs-dismiss="modal">Reject</button>
+            <button type="button" class="btn btn-primary modal-btn" value="accept" id="accept-btn">Accept</button>
         </div>
-      </div>
+        </div>
     </div>
-  </div>
+</div>
   
-  <div class="col col-lg-8 col-md-10 col-sm-11 col-11 mx-auto mt-3 mb-5">
-    <div class="d-inline-block mb-3">
+<div class="col col-lg-10 col-md-10 col-sm-11 col-11 mx-auto mt-3 mb-5 bg-white px-5 py-4 rounded border">
+    <div class="d-flex flex-row mb-3">
         <div class="dropdown open">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId-status" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
@@ -47,19 +57,17 @@
                 <button class="dropdown-item status-filters" value="0">Rejected</button>
             </div>
         </div>
-    </div>
     
-    <div class="d-inline-block mb-3">
         <div class="dropdown open">
             <button class="btn btn-secondary dropdown-toggle" type="button" id="triggerId-service" data-bs-toggle="dropdown" aria-haspopup="true"
                     aria-expanded="false">
                 All
             </button>
             <div class="dropdown-menu" id="service-filter-btn" aria-labelledby="triggerId">
-                <button class="dropdown-item btn-danger service-filters" href="#">All</button>
+                <button class="dropdown-item btn-danger service-filters" href="#" value='null'>All</button>
                 {% if services %}
                     {% for i in services %}
-                        <button class="dropdown-item btn-danger service-filters">{{i['name']}}</button>
+                        <button class="dropdown-item btn-danger service-filters" value="{{i['name']}}">{{i['name']}}</button>
                     {% endfor %}
                 {% else %}
                     
@@ -67,9 +75,18 @@
           
             </div>
         </div>
+        
+        <button type="button" class="btn btn-secondary ms-auto" onclick="window.location.reload()">            
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-arrow-clockwise" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+            </svg>
+        </button>
+        
     </div>
+
     
-    <div class="table-responsive rounded-3 bg-white border border-bottom-0">
+    <div class="table-responsive rounded-3">
         <table class="table table-hover">
             <thead>
                 <tr class>
@@ -82,6 +99,13 @@
             <tbody id="table-body" class="table-group-divider"></tbody>
         </table>
     </div>
+    <div id="loading-overlay">
+        <div class="container d-flex flex-column align-items-center py-5">
+            <div class="spinner-border text-primary" role="status">
+            </div>
+        </div>    
+    </div>
+    
 
 </div>
 
