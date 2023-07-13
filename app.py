@@ -218,7 +218,8 @@ def profile():
 
 @app.route('/officers')
 def officers():
-    return render_template(route.officers)
+    data = db.read_officers()
+    return render_template(route.officers, data=data)
 
 @app.route('/request')
 def request_page():
@@ -255,9 +256,8 @@ def update_request():
     
 @app.route('/api-test',  methods=['GET'])
 def api_test(val=None):
-    if(val): return val
-    data = db.read_services()
-    # print(type(data))
+    # if(val): return val
+    data = db.read_officers()
     return data
 
 

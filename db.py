@@ -19,6 +19,7 @@ db_config.db = db
 services_ref = db.collection('services')
 requests_ref = db.collection('request')
 state_ref = db.collection('request_state')
+officer_ref = db.collection('officer')
 
 ################################################################################
 #                               Request CRUD
@@ -118,3 +119,16 @@ def read_states():
     except Exception as e:
         return False
     
+
+################################################################################
+#                                   Office CRUD
+
+def read_officers():
+    try:
+        q = [{'name': doc.to_dict()['name'], 
+                'role':doc.to_dict()['role'], 
+                'super':doc.to_dict()['super']
+            } for doc in officer_ref.get()]
+        return q
+    except Exception as e:
+        return []
