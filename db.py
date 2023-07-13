@@ -42,11 +42,11 @@ def read_request(id=None, state_filter=None, service_filter=None):
         else:
             q = requests_ref
             
-            # if service_filter:
-            #     try:
-            #         q = q.where('service.name', '==', service_filter)
-            #     except Exception:
-            #         q = requests_ref
+            if service_filter and service_filter != 'null':
+                try:
+                    q = q.where('service.name', '==', service_filter)
+                except Exception:
+                    q = requests_ref
 
             if state_filter or state_filter == 0:
                 try:
@@ -55,7 +55,7 @@ def read_request(id=None, state_filter=None, service_filter=None):
                     q = requests_ref
                     
             l = [{'id':doc.id, 'data':doc.to_dict()} for doc in q.get()]
-            print({'siya': l})
+            # print({'siya': l})
             return l
     except Exception as e:
         return str({'errror': e})
