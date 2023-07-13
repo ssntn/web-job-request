@@ -216,6 +216,10 @@ def admin_login():
 def profile():
     return render_template(route.profile)
 
+@app.route('/officers')
+def officers():
+    return render_template(route.officers)
+
 @app.route('/request')
 def request_page():
     services = db.read_services()    
