@@ -64,15 +64,14 @@
                 All
             </button>
             <div class="dropdown-menu" id="service-filter-btn" aria-labelledby="triggerId">
-                <button class="dropdown-item btn-danger service-filters" href="#" value='null'>All</button>
+                <!-- <button class="dropdown-item btn-danger service-filters" href="#" value='null'>All</button> -->
                 {% if services %}
                     {% for i in services %}
                         <button class="dropdown-item btn-danger service-filters" value="{{i['name']}}">{{i['name']}}</button>
                     {% endfor %}
                 {% else %}
-                    
+                    <p>Error</p>
                 {% endif %}
-          
             </div>
         </div>
         
@@ -96,7 +95,8 @@
                     <th scope="col">Status</th>
                 </tr>
             </thead>
-            <tbody id="table-body" class="table-group-divider"></tbody>
+            <tbody id="table-body" class="table-group-divider">
+            </tbody>
         </table>
     </div>
     

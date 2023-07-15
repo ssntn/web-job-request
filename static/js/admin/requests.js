@@ -97,9 +97,10 @@ $(document).ready(function() {
     function add_rows(state_filter = null, service_filter = null, m = null) {
         read_request(id = null, state_filter, service_filter).then(data => {
             
+            
             $('#table-body').empty();
             $('#loading-overlay').show();
-        d = JSON.parse(data)
+            d = JSON.parse(data)
             if (d != '') {
                                 
                 d.forEach(element => {
@@ -166,6 +167,6 @@ $(document).ready(function() {
             });
 
     })}
-
-    add_rows(state_filter=1);
+    $('.service-filters').eq(0).trigger('click');
+    // add_rows(state_filter=1);
 });
