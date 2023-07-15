@@ -7,7 +7,7 @@ from uuid import uuid1
 import db_config
 from db_config import db 
 from constants import SERVICE_STATE
-from utils import today, db_today
+from utils import today, db_today, generate_password
 
 # DB init
 cred = credentials.Certificate("key.json")
@@ -43,6 +43,7 @@ def read_request(id=None, state_filter=None, service_filter=None):
         else:
             q = requests_ref
             
+            print("se: ", service_filter)
             if service_filter and service_filter != 'null':
                 try:
                     q = q.where('service.name', '==', service_filter)
@@ -129,7 +130,7 @@ def read_officers():
                 'role':doc.to_dict()['role'], 
                 'super':doc.to_dict()['super']
             } for doc in officer_ref.get()]
-        return q
+        return sorted(q, key=lambda x: not x['super'])
     except Exception as e:
         return []
     
@@ -149,3 +150,21 @@ def read_admin(email, password):
     except:
         return []
     
+def create_admin(email, name, roles):
+    password = generate_password()
+    data = {
+        'email': email,
+        'name': name,
+        'password': password,
+        'role': [i for i in roles],
+        'super': False
+    }
+
+    try: 
+        q = officer_ref.document()
+        q = q.set(data)
+        return password
+    except Exception as e: 
+        return False
+
+

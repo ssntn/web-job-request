@@ -228,7 +228,9 @@ def request_page():
     q = sorted(services, key=lambda x: x['value'])
     r = session['role']
     s = [item for item in q if item['value'] in r]
-    return render_template(route.request, services = s)
+
+    rq = fetch_request(SERVICE_STATE.PENDING, s[0]['value'])
+    return render_template(route.request, services = s, request = rq)
 
 # AJAX REQUESTS
 @app.route('/verify', methods=["POST"])
@@ -248,7 +250,7 @@ def verify():
 
         session['super'] = data['super']
         session['name'] = data['name']
-        session['role'] = data['role']
+        session['role'] = [int(i) for i in data['role']]
         return redirect(url_for('request_page'))
     
     else:
@@ -256,19 +258,24 @@ def verify():
         return redirect(request.path)
     
 @app.route('/fetch_request', methods=["GET"])
-def fetch_request():
+def fetch_request(st = None, se = None):
     if request.method == 'GET':
-        id = request.args.get('id')
-        state_filter = None
-        service_filter = None
+        data = None
 
-        try: state_filter = request.args.get('state_filter', type=int)
-        except: pass
+        if se or st:        
+            data = db.read_request(state_filter=st, service_filter=se)
+        else:
+            id = request.args.get('id')
+            state_filter = None
+            service_filter = None
 
-        try: service_filter = request.args.get('service_filter', type=str)
-        except: service_filter = request.args.get('service_filter')
+            try: state_filter = request.args.get('state_filter', type=int)
+            except: pass
 
-        data = db.read_request(id=id,state_filter=state_filter, service_filter=service_filter)
+            try: service_filter = request.args.get('service_filter', type=str)
+            except: service_filter = request.args.get('service_filter')
+
+            data = db.read_request(id=id,state_filter=state_filter, service_filter=service_filter)
         return data
     
 @app.route('/update_request/',  methods=['POST'])
@@ -278,14 +285,24 @@ def update_request():
         response = db.update_request(id=data['id'], state=data['state'])
         return response
     
+@app.route('/create_admin', methods=['POST'])
+def create_admin():
+    if request.method == 'POST':
+        data = request.get_json()
+        response = db.create_admin(email=data['email'], name=data['name'], roles=data['roles'])
+        return str(response)
+    
 @app.route('/api-test',  methods=['GET'])
 def api_test(val=None):
-    # if(val): return val
-    data = db.read_admin(
-        email="me@me.me",
-        password='pass'
-    )
-    return data
+    
+    services = db.read_services()
+    q = sorted(services, key=lambda x: x['value'])
+    r = session['role']
+    print(r[0])
+    s = [item for item in q if item['value'] in r]
+    data = fetch_request(st=SERVICE_STATE.PENDING, se=s[0]['name'])
+
+    return str(data)
 
 
 if __name__ == "__main__":
