@@ -1,5 +1,6 @@
 # 3rd Part thigns
 from flask import Flask, render_template, redirect, request, session, request, jsonify, url_for
+import json
 
 # Ian defined imports
 import routes as route
@@ -95,7 +96,7 @@ def form_g():
     if request.method == 'POST':        
         session["name"] = request.form.get("name")
         session["email"] = request.form.get("email")
-        session["contact"] = request.form.get("contact")
+        session["contact"] = request.form.get("contact")    
         session["service"] = request.form.get("service")
         return render_template(route.service_g)
 
@@ -227,6 +228,23 @@ def request_page():
     return render_template(route.request, services = sorted(services, key=lambda x: x['value']))
 
 # AJAX REQUESTS
+@app.route('/verify', methods=["POST"])
+def verify():
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+
+        data = db.read_admin(email=email, password=password)
+
+        if(data == []):
+            session['login_error'] = True
+            return admin_login()
+
+        return request_page()
+    else:
+        error = {'error', 'HTTP request error.'}
+        return redirect(request.path)
+    
 @app.route('/fetch_request', methods=["GET"])
 def fetch_request():
     if request.method == 'GET':
@@ -257,7 +275,10 @@ def update_request():
 @app.route('/api-test',  methods=['GET'])
 def api_test(val=None):
     # if(val): return val
-    data = db.read_officers()
+    data = db.read_admin(
+        email="me@me.me",
+        password='pass'
+    )
     return data
 
 

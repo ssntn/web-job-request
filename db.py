@@ -132,3 +132,20 @@ def read_officers():
         return q
     except Exception as e:
         return []
+    
+def read_admin(email, password):
+    q = officer_ref
+    q = q.where(filter=FieldFilter('email', '==', email)).get()
+
+    try:
+        q = [doc.to_dict() for doc in q][0]
+
+        if(password != q['password']):
+            return []
+        
+        q.pop('email')
+        q.pop('password')
+        return q
+    except:
+        return []
+    

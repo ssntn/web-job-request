@@ -7,22 +7,35 @@
 
 {% block body %}
 
-<div class="d-flex flex-column w-50 mx-auto bg-white rounded-3 shadow-lg py-5 my-5 h-75">
-    <h3 class="w-100 text-center mb-5">Admin   Log In</h3>
 
-    <!-- <form action="" method="post"></form> -->
-    <div class="w-75 mx-auto">
-        <div class="mb-3 mx-auto">
-          <label for="email" class="form-label">Email</label>
-          <input type="email"
-            class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Email" required>
-        </div>
-        <div class="mb-3 mx-auto">
-          <label for="password" class="form-label">Password</label>
-          <input type="password" class="form-control" name="password" id="password" placeholder="" required>
-        </div>
-        <a href="/request" type="submit" class="btn btn-danger w-25 mt-3">Log In</a>
-    </div>
+{% if 'login_error' in session %}
+  <div class="alert alert-warning col-10 col-xl-10 col-lg-10 col-md-10 col-sm-12 mx-auto" role="alert">
+    Incorrect email or password
+  </div>
+{% endif %}
+<div class="d-flex flex-column w-50 mx-auto bg-white rounded-3 shadow-lg py-5 my-5 h-75">
+
+  <h3 class="w-100 text-center mb-5">Admin   Log In</h3>
+
+  <!-- <form action="" method="post"></form> -->
+  <div class="w-75 mx-auto">
+    <form action="{{ url_for('verify') }}" method="POST">
+
+      <div class="mb-3 mx-auto">
+        <label for="email" class="form-label">Email</label>
+        <input type="email"
+          class="form-control" name="email" id="email" aria-describedby="helpId" placeholder="Email" required>
+      </div>
+
+      <div class="mb-3 mx-auto">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" name="password" id="password" placeholder="" required>
+      </div>
+
+      <button type="submit" class="btn btn-danger mt-3">Log In</button>
+
+    </form>
+  </div>
     
 </div>
 
