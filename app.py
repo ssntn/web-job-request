@@ -224,8 +224,11 @@ def officers():
 
 @app.route('/request')
 def request_page():
-    services = db.read_services()    
-    return render_template(route.request, services = sorted(services, key=lambda x: x['value']))
+    services = db.read_services()
+    q = sorted(services, key=lambda x: x['value'])
+    r = session['role']
+    s = [item for item in q if item['value'] in r]
+    return render_template(route.request, services = s)
 
 # AJAX REQUESTS
 @app.route('/verify', methods=["POST"])
@@ -238,11 +241,18 @@ def verify():
 
         if(data == []):
             session['login_error'] = True
-            return admin_login()
+            return redirect(url_for('admin_login'))
 
-        return request_page()
+        if("login_error" in session):
+            session.pop('login_error')
+
+        session['super'] = data['super']
+        session['name'] = data['name']
+        session['role'] = data['role']
+        return redirect(url_for('request_page'))
+    
     else:
-        error = {'error', 'HTTP request error.'}
+        session['http_error'] = True
         return redirect(request.path)
     
 @app.route('/fetch_request', methods=["GET"])
@@ -261,16 +271,12 @@ def fetch_request():
         data = db.read_request(id=id,state_filter=state_filter, service_filter=service_filter)
         return data
     
-    
 @app.route('/update_request/',  methods=['POST'])
 def update_request():
     if request.method == 'POST':
         data = request.get_json()
-
-        # dates = { SERVICE_STATE.GET_STRING[data['state']] : today() }
         response = db.update_request(id=data['id'], state=data['state'])
         return response
-    
     
 @app.route('/api-test',  methods=['GET'])
 def api_test(val=None):
