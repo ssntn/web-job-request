@@ -55,32 +55,34 @@
                     <b style="color: var(--primary-color);">UITC</b><span class="fs-6 my-auto"> | admin</span>
                 </a>
 
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                    <div class="collapse navbar-collapse" id="navbarNav">
-                        <ul class="ms-auto me-5 navbar-nav">
-                            <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="/request">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link disabled" href="/analytics">Analytics</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/officers">Officers</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img class="rounded-circle" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png" alt="User" width="36px" height="36px">
-                                </a>
-                                <ul class="dropdown-menu dropdown-menu-end">
-                                    <li class=""><a class="dropdown-item" href="/profile">Profile</a></li>
-                                    <li class=""><a class="dropdown-item" href="/logout">Logout</a></li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </div>
-                </div>                
+                {% if 'name' in session %}
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                        <div class="collapse navbar-collapse" id="navbarNav">
+                            <ul class="ms-auto me-5 navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link active" aria-current="page" href="/request">Home</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link disabled" href="/analytics">Analytics</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/officers">Officers</a>
+                                </li>
+                                <li class="nav-item dropdown">
+                                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img class="rounded-circle" src="https://uxwing.com/wp-content/themes/uxwing/download/peoples-avatars/no-profile-picture-icon.png" alt="User" width="36px" height="36px">
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-menu-end">
+                                        <li class=""><a class="dropdown-item" href="/profile">Profile</a></li>
+                                        <li class=""><a class="dropdown-item" href="/logout">Logout</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div> 
+                {% endif %}
             </div>
         </nav>
             
@@ -90,7 +92,7 @@
 
     <!-- FOOTER -->
     <footer>
-        <div class="footer navbar-fixed-bottom bg-secondary-subtle mx-3 my-1">
+        <div class="footer navbar-fixed-bottom bg-secondary-subtle px-3 my-1">
         <!-- style="background-color: var(--primary-color);"> -->
         
             <p id="uitc" class="small text-black-50">Copyright &copy 2023 All Rights Reserved by TUP-UITC.</p>

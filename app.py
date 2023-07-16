@@ -211,7 +211,14 @@ def loading():
 # Admin Routing 
 @app.route('/admin')
 def admin_login():
+    if 'name' in session: return redirect(url_for('request_page'))
     return render_template(route.admin_login)
+
+@app.route('/logout')
+def admin_logout():
+    if 'name' in session: session.clear()  
+    return redirect(url_for('admin_login'))
+    
 
 @app.route('/profile')
 def profile():
@@ -224,6 +231,8 @@ def officers():
 
 @app.route('/request')
 def request_page():
+    if not 'name' in session: return redirect(url_for('request_page'))
+        
     services = db.read_services()
     q = sorted(services, key=lambda x: x['value'])
     r = session['role']
@@ -234,7 +243,7 @@ def request_page():
 
 # AJAX REQUESTS
 @app.route('/verify', methods=["POST"])
-def verify():
+def verify():    
     if request.method == 'POST':
         email = request.form.get('email')
         password = request.form.get('password')
@@ -259,6 +268,8 @@ def verify():
     
 @app.route('/fetch_request', methods=["GET"])
 def fetch_request(st = None, se = None):
+    if not 'name' in session: return redirect(url_for('admin_login'))
+    
     if request.method == 'GET':
         data = None
 
