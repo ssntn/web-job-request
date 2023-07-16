@@ -38,7 +38,10 @@ def read_request(id=None, state_filter=None, service_filter=None):
         if id and id != 'null':
             doc = requests_ref.document(id).get()
             print({'id': id})
-            return {'id': doc.id, 'data': doc}.to_dict()
+            response = None
+            try: response = {'id': doc.id, 'data': doc}.to_dict()
+            except Exception as e: response = [{'id': doc.id, 'data': doc.to_dict()}] 
+            return jsonify(response)
         
         else:
             q = requests_ref

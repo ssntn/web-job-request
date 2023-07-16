@@ -54,6 +54,7 @@ $(document).ready(function() {
         $('.modal-title').text('Loading..')
 
         read_request(rowId).then(function(data) {
+            
             $('#loading-modal').show();
 
             if(!data) return;
@@ -86,6 +87,7 @@ $(document).ready(function() {
             $('.modal-btn').click(function(){                
                 if($(this).val().toLowerCase() === 'accept') update_request(id, data.state);
                 else update_request(data.id, SERVICE_STATE.REJECTED);
+                window.location.reload();
             })
 
         });
@@ -153,7 +155,7 @@ $(document).ready(function() {
                 return response.json();
 
             }).then((data) => {                
-                // id filter
+                // id filter                
                 if (id) {
                     var foundData = data.find(element => { return element.id === id; });
                     resolve(foundData || null);

@@ -64,9 +64,11 @@
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/request">Home</a>
                                 </li>
+                                {% if 'super' in session and session['super'] == True %}
                                 <li class="nav-item">
-                                    <a class="nav-link disabled" href="/analytics">Analytics</a>
+                                    <a class="nav-link" href="https://console.firebase.google.com/u/0/">Analytics</a>
                                 </li>
+                                {% endif %}
                                 <li class="nav-item">
                                     <a class="nav-link" href="/officers">Officers</a>
                                 </li>
