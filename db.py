@@ -183,7 +183,7 @@ def create_super(email, name):
     try: 
         q = officer_ref.document()
         q = q.set(data)
-        return jsonify(password)
+        return jsonify  (password)
     
     except Exception as e: 
         return jsonify(False)

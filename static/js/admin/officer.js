@@ -21,7 +21,7 @@ $(document).ready(() => {
             contentType: "application/json; charset=utf-8",
 
             success: (response) => {
-                alert('response: '+response+labels);
+                alert('TAKE NOTE OF THIS PASSWORD: '+response);
 
             },error: (xhr, status, error) => {
                 alert(error);
