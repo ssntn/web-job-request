@@ -22,6 +22,7 @@ $(document).ready(() => {
 
             success: (response) => {
                 alert('TAKE NOTE OF THIS PASSWORD: '+response);
+                window.location.reload()
 
             },error: (xhr, status, error) => {
                 alert(error);
