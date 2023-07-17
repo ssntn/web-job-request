@@ -169,5 +169,22 @@ def create_admin(email, name, roles):
         return password
     except Exception as e: 
         return False
+    
+def create_super(email, name):
+    password = generate_password()
+    data = {
+        'email': email,
+        'name': name,
+        'password': password,
+        'role': [i for i in range(7)],
+        'super': True        
+    }
 
+    try: 
+        q = officer_ref.document()
+        q = q.set(data)
+        return jsonify(password)
+    
+    except Exception as e: 
+        return jsonify(False)
 

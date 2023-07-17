@@ -315,6 +315,15 @@ def api_test(val=None):
 
     return str(data)
 
+    
+@app.route('/create-super',  methods=['GET'])
+def create_super(val=None):
+    response = db.create_super(
+        name= 'Julius Sareno',
+        email= 'uitc.edu.ph'
+    )
+    return response
+
 
 if __name__ == "__main__":
     app.run(debug=True)
